@@ -23,7 +23,11 @@
 		<mkdir dir="${dir.build}/WEB-INF/classes" />
 		<mkdir dir="${dir.build}/WEB-INF/lib" />
 		<copy todir="${dir.build}/WEB-INF/lib">
-			<fileset dir="${dir.lib}" />
+			<fileset dir="${dir.lib}">
+				<include name="*.jar" />
+				<exclude name="servlet-api-*" />
+				<exclude name="jsp-api-*" />
+			</fileset>
 		</copy>
 		<copy todir="${dir.build}/WEB-INF">
 			<fileset dir="${dir.src.deploy}" />
@@ -33,7 +37,9 @@
 		</copy>
 		<javac srcdir="${dir.src.app}" destdir="${dir.build}/WEB-INF/classes" debug="${debug}" deprecation="yes">
 			<classpath>
-				<fileset dir="${dir.lib}" />
+				<fileset dir="${dir.lib}">
+					<include name="*.jar"/>
+				</fileset>
 			</classpath>
 		</javac>
 		<copy todir="${dir.build}/WEB-INF/classes">

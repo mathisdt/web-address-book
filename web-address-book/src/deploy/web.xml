@@ -8,7 +8,12 @@
     <description>
         An address book which understands family structures and supports reordering entries.
     </description>
-
+    
+    <listener>
+        <listener-class>org.zephyrsoft.wab.DatabaseManagerContextListener</listener-class>
+    </listener>
+    
+    
     <servlet>
       <servlet-name>AddressBookServlet</servlet-name>
       <servlet-class>org.zephyrsoft.wab.AddressBookServlet</servlet-class>
@@ -18,5 +23,9 @@
       <servlet-name>AddressBookServlet</servlet-name>
       <url-pattern>/app</url-pattern>
     </servlet-mapping>
+    
+    <session-config>
+      <session-timeout>60</session-timeout>
+    </session-config>
     
 </web-app>
