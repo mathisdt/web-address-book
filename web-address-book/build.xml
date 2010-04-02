@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<project name="${project.name}" default="war" basedir=".">
+
+	<property environment="env" />
+	<property file="ant.properties" />
+
+	<patternset id="fileset.resources">
+		<include name="**/*properties" />
+		<include name="**/*html" />
+		<include name="**/*js" />
+		<include name="**/*gif" />
+		<include name="**/*jpg" />
+		<include name="**/*png" />
+	</patternset>
+
+	<target name="clean" description="Clears all generated files, including build directories, distributables, and documentation.">
+		<delete dir="${dir.build}" />
+		<delete dir="${dir.war}" />
+	</target>
+
+	<target name="compile" description="Compiles the application and arranges resources into a web archive hierarchy.">
+		<mkdir dir="${dir.build}/WEB-INF/classes" />
+		<mkdir dir="${dir.build}/WEB-INF/lib" />
+		<copy todir="${dir.build}/WEB-INF/lib">
+			<fileset dir="${dir.lib}" />
+		</copy>
+		<copy todir="${dir.build}/WEB-INF">
+			<fileset dir="${dir.src.deploy}" />
+		</copy>
+		<copy todir="${dir.build}">
+			<fileset dir="${dir.src.htdocs}" />
+		</copy>
+		<javac srcdir="${dir.src.app}" destdir="${dir.build}/WEB-INF/classes" debug="${debug}" deprecation="yes">
+			<classpath>
+				<fileset dir="${dir.lib}" />
+			</classpath>
+		</javac>
+		<copy todir="${dir.build}/WEB-INF/classes">
+			<fileset dir="${dir.src.app}">
+				<patternset refid="fileset.resources" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="war" depends="clean, compile" description="Builds a web archive of the application.">
+		<mkdir dir="${dir.war}" />
+		<jar jarfile="${dir.war}/${warfile}" basedir="${dir.build}" />
+	</target>
+
+</project>
