@@ -20,7 +20,7 @@ public class DatabaseManagerContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent sce) {
 		server = new Server();
         server.setDatabaseName(0, "test");
-        server.setDatabasePath(0, "jdbc:hsqldb:file:db/db");
+        server.setDatabasePath(0, "hsqldb/test");
         server.setLogWriter(null);
         server.setErrWriter(null);
         server.start();
