@@ -9,9 +9,9 @@
 	<classpathentry kind="lib" path="lib/jsp-api-2.0.jar" sourcepath="lib/jsp-api-2.0-src.zip"/>
 	<classpathentry kind="lib" path="lib/servlet-api-2.4.jar" sourcepath="lib/servlet-api-2.4-src.zip"/>
 	<classpathentry kind="lib" path="lib/ebean-2.5.1.jar" sourcepath="lib/ebean-2.5.1-src.zip"/>
-	<classpathentry kind="lib" path="lib/hsqldb-1.8.1.2.jar" sourcepath="lib/hsqldb-1.8.1.2-src.zip"/>
 	<classpathentry kind="lib" path="lib/jta-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/persistence-api-1.0.jar" sourcepath="lib/persistence-api-1.0-src.zip"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.12.jar" sourcepath="lib/mysql-connector-java-5.1.12-src.zip"/>
+	<classpathentry kind="lib" path="lib/h2-1.2.132.jar" sourcepath="lib/h2-1.2.132-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

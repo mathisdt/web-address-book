@@ -12,6 +12,7 @@ public class EbeanEntityTest {
 		cl.contextInitialized(null);
 		
 		try {
+			Ebean.beginTransaction();
 			
 			// insert
 			Family f = new Family();
@@ -19,8 +20,11 @@ public class EbeanEntityTest {
 			Ebean.save(f);
 			
 			// update
-			f.setPostalCode("30167");
+			f.setPostalCode("30159");
 			f.setCity("Hannover");
+			Person p = new Person();
+			p.setFirstName("Bla");
+			f.addMember(p);
 			Ebean.save(f);
 			
 			//query
@@ -28,9 +32,12 @@ public class EbeanEntityTest {
 			System.out.println("f:" + f.getLastName() + " / " + "f2:" + f2.getLastName());
 			
 			// delete
-			Ebean.delete(f);
+//			Ebean.delete(f);
+			
+			Ebean.commitTransaction();
 			
 		} finally {
+			Ebean.endTransaction();
 			cl.contextDestroyed(null);
 		}
 	}

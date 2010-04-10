@@ -1,7 +1,8 @@
 package org.zephyrsoft.wab;
 
+import java.sql.*;
 import javax.servlet.*;
-import org.hsqldb.Server;
+import org.h2.tools.*;
 
 public class DatabaseManagerContextListener implements ServletContextListener {
 	
@@ -18,21 +19,22 @@ public class DatabaseManagerContextListener implements ServletContextListener {
 	}
 	
 	public void contextInitialized(ServletContextEvent sce) {
-		server = new Server();
-        server.setDatabaseName(0, "test");
-        server.setDatabasePath(0, "hsqldb/test");
-        server.setLogWriter(null);
-        server.setErrWriter(null);
-        server.start();
-        System.out.println("started hsqldb server");
+		try {
+			server = Server.createTcpServer(); // use argument "-tcpAllowOthers" if all interfaces should be bound (and not only "localhost")
+			server.start();
+			System.out.println("started h2 server");
+		} catch (SQLException e) {
+			System.out.println("couldn't start h2 server - SQLException occurred");
+			e.printStackTrace();
+		}
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
 		if (server!=null) {
 			server.stop();
-			System.out.println("stopped hsqldb server");
+			System.out.println("stopped h2 server");
 		} else {
-			System.out.println("couldn't stop hsqldb server - reference was null");
+			System.out.println("couldn't stop h2 server - reference was null");
 		}
 	}
 }

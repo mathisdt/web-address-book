@@ -1,6 +1,7 @@
 package org.zephyrsoft.wab.model;
 
 import java.sql.*;
+import java.util.*;
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +19,10 @@ public class Family {
 	private String contact1;
 	private String contact2;
 	private String contact3;
+	private String remarks;
+	
+	@OneToMany(targetEntity=Person.class, mappedBy="family", cascade=CascadeType.ALL)
+	private List<Person> members = null;
 	
 	public Integer getId() {
 		return id;
@@ -72,5 +77,61 @@ public class Family {
 	}
 	public void setContact3(String contact3) {
 		this.contact3 = contact3;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	
+	private void initMembers() {
+		members = new ArrayList<Person>();
+	}
+	
+	public List<Person> getMembers() {
+		if (members==null) {
+			initMembers();
+		}
+		return members;
+	}
+	public void setMembers(List<Person> members) {
+		this.members = members;
+	}
+	public boolean addMember(Person e) {
+		if (members==null) {
+			initMembers();
+		}
+		return members.add(e);
+	}
+	public void clearMembers() {
+		if (members==null) {
+			initMembers();
+		}
+		members.clear();
+	}
+	public boolean containsMember(Object o) {
+		if (members==null) {
+			initMembers();
+		}
+		return members.contains(o);
+	}
+	public boolean removeMember(Object o) {
+		if (members==null) {
+			initMembers();
+		}
+		return members.remove(o);
+	}
+	public boolean isEmpty() {
+		if (members==null) {
+			initMembers();
+		}
+		return members.isEmpty();
+	}
+	public int size() {
+		if (members==null) {
+			initMembers();
+		}
+		return members.size();
 	}
 }
