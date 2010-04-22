@@ -13,5 +13,10 @@
 	<classpathentry kind="lib" path="lib/persistence-api-1.0.jar" sourcepath="lib/persistence-api-1.0-src.zip"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.12.jar" sourcepath="lib/mysql-connector-java-5.1.12-src.zip"/>
 	<classpathentry kind="lib" path="lib/h2-1.2.132.jar" sourcepath="lib/h2-1.2.132-src.zip"/>
+	<classpathentry kind="lib" path="lib/Echo3_FileTransfer_App_20100402.jar" sourcepath="lib/Echo3_FileTransfer_App_20100402-src.zip"/>
+	<classpathentry kind="lib" path="lib/Echo3_FileTransfer_Model_20100402.jar" sourcepath="lib/Echo3_FileTransfer_Model_20100402-src.zip"/>
+	<classpathentry kind="lib" path="lib/Echo3_FileTransfer_Receiver_20100402.jar" sourcepath="lib/Echo3_FileTransfer_Receiver_20100402-src.zip"/>
+	<classpathentry kind="lib" path="lib/Echo3_FileTransfer_WebContainer_20100402.jar" sourcepath="lib/Echo3_FileTransfer_WebContainer_20100402-src.zip"/>
+	<classpathentry kind="lib" path="lib/echopoint-3.0.0b5.jar" sourcepath="lib/echopoint-3.0.0b5-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

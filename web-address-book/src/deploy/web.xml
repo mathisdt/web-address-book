@@ -10,7 +10,7 @@
     </description>
     
     <listener>
-        <listener-class>org.zephyrsoft.wab.DatabaseManagerContextListener</listener-class>
+        <listener-class>org.zephyrsoft.wab.ContextListener</listener-class>
     </listener>
     
     

@@ -12,6 +12,7 @@ public class Person {
 	private Timestamp lastUpdate;
 	
 	private String firstName;
+	private String birthday;
 	private String contact1;
 	private String contact2;
 	private String contact3;
@@ -67,5 +68,11 @@ public class Person {
 	}
 	public void setFamily(Family family) {
 		this.family = family;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
 	}
 }

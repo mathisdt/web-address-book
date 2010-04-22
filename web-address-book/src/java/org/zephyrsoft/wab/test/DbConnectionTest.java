@@ -7,7 +7,7 @@ public class DbConnectionTest {
 	
 	public static void main(String[] args) {
 		
-		DatabaseManagerContextListener cl = new DatabaseManagerContextListener();
+		ContextListener cl = new ContextListener();
 		cl.contextInitialized(null);
 		
 		try {

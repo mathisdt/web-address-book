@@ -3,6 +3,7 @@ package org.zephyrsoft.wab.model;
 import java.sql.*;
 import java.util.*;
 import javax.persistence.*;
+import com.avaje.ebean.*;
 
 @Entity
 @Table(name="family")
@@ -90,9 +91,6 @@ public class Family {
 	}
 	
 	public List<Person> getMembers() {
-		if (members==null) {
-			initMembers();
-		}
 		return members;
 	}
 	public void setMembers(List<Person> members) {
@@ -106,31 +104,45 @@ public class Family {
 	}
 	public void clearMembers() {
 		if (members==null) {
-			initMembers();
+			return;
+		} else {
+			for (Person p : this.members) {
+				removeMember(p);
+			}
 		}
-		members.clear();
 	}
-	public boolean containsMember(Object o) {
+	public boolean containsMember(Person o) {
 		if (members==null) {
-			initMembers();
+			return false;
 		}
 		return members.contains(o);
 	}
-	public boolean removeMember(Object o) {
+	public Person newMember() {
 		if (members==null) {
 			initMembers();
+		}
+		Person p = new Person();
+		addMember(p);
+		return p;
+	}
+	public boolean removeMember(Person o) {
+		if (members==null) {
+			return false;
+		}
+		if (o!=null) {
+			Ebean.delete(o);
 		}
 		return members.remove(o);
 	}
 	public boolean isEmpty() {
 		if (members==null) {
-			initMembers();
+			return true;
 		}
 		return members.isEmpty();
 	}
 	public int size() {
 		if (members==null) {
-			initMembers();
+			return 0;
 		}
 		return members.size();
 	}
