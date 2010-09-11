@@ -17,7 +17,7 @@ public class FamilyPanel extends Panel {
 	private Column personsColumn = null; // contains all person panels that exist
 	
 	private Button deleteFamily = null;
-	private Button addMember = null;
+	private Button addPerson = null;
 	
 	private TextField lastName = null;
 	private TextField street = null;
@@ -44,16 +44,16 @@ public class FamilyPanel extends Panel {
 		titleRow = new Row();
 		detailColumn = new Column();
 		personsColumn = new Column();
-		deleteFamily = new Button("delete this family");
-		addMember = new Button("add member");
-		lastName = new KeystrokeTextField(500);
-		street = new KeystrokeTextField(500);
-		postalCode = new KeystrokeTextField(500);
-		city = new KeystrokeTextField(500);
-		contact1 = new KeystrokeTextField(500);
-		contact2 = new KeystrokeTextField(500);
-		contact3 = new KeystrokeTextField(500);
-		remarks = new KeystrokeTextField(500);
+		deleteFamily = new Button("delete family");
+		addPerson = new Button("add person");
+		lastName = new TextField();
+		street = new TextField();
+		postalCode = new TextField();
+		city = new TextField();
+		contact1 = new TextField();
+		contact2 = new TextField();
+		contact3 = new TextField();
+		remarks = new TextField();
 		
 		// set start values
 		lastName.setText(family.getLastName());
@@ -93,18 +93,20 @@ public class FamilyPanel extends Panel {
         topColumn.add(titleRow);
         
         // fill persons column
-        for (Person p : family.getMembers()) {
-        	personsColumn.add(new PersonPanel(p));
+        if (family.getMembers()!=null) {
+	        for (Person p : family.getMembers()) {
+	        	personsColumn.add(new PersonPanel(p));
+	        }
         }
         
         // build details area
         detailColumn.setInsets(new Insets(40, 0, 0, 0));
         detailColumn.add(personsColumn);
-        addMember.setBackground(Color.LIGHTGRAY);
-        addMember.setInsets(new Insets(4));
-        Row addMemberRow = new Row();
-        addMemberRow.add(addMember);
-        detailColumn.add(addMemberRow);
+        addPerson.setBackground(Color.LIGHTGRAY);
+        addPerson.setInsets(new Insets(4));
+        Row addPersonRow = new Row();
+        addPersonRow.add(addPerson);
+        detailColumn.add(addPersonRow);
         topColumn.add(detailColumn);
         
         // bind view to model
@@ -116,6 +118,45 @@ public class FamilyPanel extends Panel {
         DataUtil.bindTextfield(contact2, family, "contact2");
         DataUtil.bindTextfield(contact3, family, "contact3");
         DataUtil.bindTextfield(remarks, family, "remarks");
+        
+        // Actions
+        addPerson.addActionListener(new ActionListener() {
+			private static final long serialVersionUID = -4798229206323253003L;
+			public void actionPerformed(ActionEvent e) {
+				try {
+					// add new person to this family
+					Person person = null;
+					DataUtil.beginTransaction();
+					person = new Person();
+					getFamily().addMember(person);
+					DataUtil.save(getFamily());
+					DataUtil.commitTransaction();
+					// add view for new person
+					personsColumn.add(new PersonPanel(person));
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					DataUtil.endTransaction();
+				}
+			}
+		});
+        deleteFamily.addActionListener(new ActionListener() {
+			private static final long serialVersionUID = -4798229206323253001L;
+			public void actionPerformed(ActionEvent e) {
+				try {
+					// delete family from database
+					DataUtil.beginTransaction();
+					DataUtil.delete(getFamily());
+					DataUtil.commitTransaction();
+					// hide view for this family
+					getParent().remove(FamilyPanel.this);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					DataUtil.endTransaction();
+				}
+			}
+		});
 	}
 
 	public Family getFamily() {

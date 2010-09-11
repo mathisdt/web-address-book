@@ -19,7 +19,9 @@ public class DataUtil {
 	}
 	
 	public static Transaction beginTransaction() {
-		return getEbeanServerInstance().beginTransaction();
+		Transaction t = getEbeanServerInstance().beginTransaction();
+		t.setPersistCascade(true);
+		return t;
 	}
 
 	public static void commitTransaction() {

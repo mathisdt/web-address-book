@@ -18,6 +18,7 @@ public class Screen extends ContentPane {
 	private AddressBookApp app = null;
 	
 	private Button downloadPdf = null;
+	private Button addFamily = null;
 	private Column data = null;
 	
 	public Screen(AddressBookApp app) {
@@ -39,6 +40,28 @@ public class Screen extends ContentPane {
 				downloadPdf();
 			}
 		});
+        addFamily = new Button("add family");
+        addFamily.setBackground(Color.LIGHTGRAY);
+        addFamily.setInsets(new Insets(4));
+        addFamily.addActionListener(new ActionListener() {
+			private static final long serialVersionUID = 9132114868976616923L;
+			public void actionPerformed(ActionEvent e) {
+				try {
+					// add family
+					Family family = null;
+					DataUtil.beginTransaction();
+					family = new Family();
+					DataUtil.save(family);
+					DataUtil.commitTransaction();
+					// add view for new family
+					data.add(new FamilyPanel(family));
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					DataUtil.endTransaction();
+				}
+			}
+		});
         Row buttonRow = new Row();
         buttonRow.add(downloadPdf);
         topColumn.add(buttonRow);
@@ -52,6 +75,12 @@ public class Screen extends ContentPane {
         	FamilyPanel panel = new FamilyPanel(f);
         	data.add(panel);
         }
+        
+        Row bottomRow = new Row();
+        bottomRow.setInsets(new Insets(30));
+        bottomRow.setCellSpacing(new Extent(10));
+        bottomRow.add(addFamily);
+        topColumn.add(bottomRow);
 	}
 	
 	private void downloadPdf() {
