@@ -38,14 +38,14 @@ public class PersonPanel extends Panel {
 	private void initView() {
 		// create instances
 		titleRow = new Row();
-		deletePerson = new Button("delete member");
-		firstName = new KeystrokeTextField(500);
-		lastName = new KeystrokeTextField(500);
-		birthday = new KeystrokeTextField(500);
-		contact1 = new KeystrokeTextField(500);
-		contact2 = new KeystrokeTextField(500);
-		contact3 = new KeystrokeTextField(500);
-		remarks = new KeystrokeTextField(500);
+		deletePerson = new Button("delete person");
+		firstName = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		lastName = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		birthday = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		contact1 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		contact2 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		contact3 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		remarks = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
 		
 		// set start values
 		firstName.setText(person.getFirstName());
@@ -76,8 +76,7 @@ public class PersonPanel extends Panel {
         titleRow.add(contact2);
         titleRow.add(contact3);
         titleRow.add(remarks);
-        deletePerson.setBackground(Color.LIGHTGRAY);
-        deletePerson.setInsets(new Insets(4));
+        EchoUtil.layoutAsButton(deletePerson);
         titleRow.add(deletePerson);
         topColumn.add(titleRow);
         

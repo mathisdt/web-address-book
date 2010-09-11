@@ -7,6 +7,7 @@ import com.avaje.ebeaninternal.server.lib.cron.*;
 import org.zephyrsoft.wab.model.*;
 import org.zephyrsoft.wab.util.*;
 import nextapp.echo.app.*;
+import nextapp.echo.app.Border.*;
 import nextapp.echo.app.Font.*;
 import nextapp.echo.app.event.*;
 import nextapp.echo.filetransfer.app.*;
@@ -32,8 +33,7 @@ public class Screen extends ContentPane {
         title.setFont(new Font(new Typeface("Arial"), Font.BOLD + Font.UNDERLINE, new Extent(20)));
         topColumn.add(title);
         downloadPdf = new Button("Download as PDF");
-        downloadPdf.setBackground(Color.LIGHTGRAY);
-        downloadPdf.setInsets(new Insets(4));
+        EchoUtil.layoutAsButton(downloadPdf);
         downloadPdf.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = 9132114868976616925L;
 			public void actionPerformed(ActionEvent e) {
@@ -41,8 +41,7 @@ public class Screen extends ContentPane {
 			}
 		});
         addFamily = new Button("add family");
-        addFamily.setBackground(Color.LIGHTGRAY);
-        addFamily.setInsets(new Insets(4));
+        EchoUtil.layoutAsButton(addFamily);
         addFamily.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = 9132114868976616923L;
 			public void actionPerformed(ActionEvent e) {
@@ -67,6 +66,8 @@ public class Screen extends ContentPane {
         topColumn.add(buttonRow);
         
         data = new Column();
+        Side[] border = new Side[] {new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE), new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE), new Side(new Extent(10), Color.YELLOW, Border.STYLE_SOLID), new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE)};
+		data.setBorder(new Border(border));
         topColumn.add(data);
         
         List<Family> families = DataUtil.createQuery(Family.class).findList();
@@ -77,7 +78,6 @@ public class Screen extends ContentPane {
         }
         
         Row bottomRow = new Row();
-        bottomRow.setInsets(new Insets(30));
         bottomRow.setCellSpacing(new Extent(10));
         bottomRow.add(addFamily);
         topColumn.add(bottomRow);

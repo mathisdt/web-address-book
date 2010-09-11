@@ -4,6 +4,7 @@ import echopoint.*;
 import org.zephyrsoft.wab.model.*;
 import org.zephyrsoft.wab.util.*;
 import nextapp.echo.app.*;
+import nextapp.echo.app.Border.Side;
 import nextapp.echo.app.event.*;
 
 public class FamilyPanel extends Panel {
@@ -46,14 +47,14 @@ public class FamilyPanel extends Panel {
 		personsColumn = new Column();
 		deleteFamily = new Button("delete family");
 		addPerson = new Button("add person");
-		lastName = new TextField();
-		street = new TextField();
-		postalCode = new TextField();
-		city = new TextField();
-		contact1 = new TextField();
-		contact2 = new TextField();
-		contact3 = new TextField();
-		remarks = new TextField();
+		lastName = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		street = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		postalCode = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		city = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		contact1 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		contact2 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		contact3 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		remarks = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
 		
 		// set start values
 		lastName.setText(family.getLastName());
@@ -64,6 +65,11 @@ public class FamilyPanel extends Panel {
 		contact2.setText(family.getContact2());
 		contact3.setText(family.getContact3());
 		remarks.setText(family.getRemarks());
+		
+		// borders
+		Side[] border = new Side[] {new Side(new Extent(10), Color.YELLOW, Border.STYLE_SOLID), new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE), new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE), new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE)};
+		setBorder(new Border(border));
+		setInsets(new Insets(new Extent(0), new Extent(0), new Extent(0), new Extent(10)));
 		
 		// top level container
 		Column topColumn = new Column();
@@ -87,8 +93,7 @@ public class FamilyPanel extends Panel {
         titleRow.add(contact2);
         titleRow.add(contact3);
         titleRow.add(remarks);
-        deleteFamily.setBackground(Color.LIGHTGRAY);
-        deleteFamily.setInsets(new Insets(4));
+        EchoUtil.layoutAsButton(deleteFamily);
         titleRow.add(deleteFamily);
         topColumn.add(titleRow);
         
@@ -102,8 +107,7 @@ public class FamilyPanel extends Panel {
         // build details area
         detailColumn.setInsets(new Insets(40, 0, 0, 0));
         detailColumn.add(personsColumn);
-        addPerson.setBackground(Color.LIGHTGRAY);
-        addPerson.setInsets(new Insets(4));
+        EchoUtil.layoutAsButton(addPerson);
         Row addPersonRow = new Row();
         addPersonRow.add(addPerson);
         detailColumn.add(addPersonRow);
