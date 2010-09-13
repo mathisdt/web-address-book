@@ -63,19 +63,19 @@ public class PersonPanel extends Panel {
         
         // title row
         firstName.setToolTipText("first name");
-        lastName.setToolTipText("last name (if different from family name)");
+        lastName.setToolTipText("last name" + " (if different from family name)");
 		birthday.setToolTipText("birthday");
 		contact1.setToolTipText("phone/mobile/email 1");
 		contact2.setToolTipText("phone/mobile/email 2");
 		contact3.setToolTipText("phone/mobile/email 3");
 		remarks.setToolTipText("remarks");
-        titleRow.add(firstName);
-        titleRow.add(lastName);
-        titleRow.add(birthday);
-        titleRow.add(contact1);
-        titleRow.add(contact2);
-        titleRow.add(contact3);
-        titleRow.add(remarks);
+        titleRow.add(EchoUtil.createSmallLabel(firstName, "first name"));
+        titleRow.add(EchoUtil.createSmallLabel(lastName, "last name"));
+        titleRow.add(EchoUtil.createSmallLabel(birthday, "birthday"));
+        titleRow.add(EchoUtil.createSmallLabel(contact1, "phone/mobile/email 1"));
+        titleRow.add(EchoUtil.createSmallLabel(contact2, "phone/mobile/email 2"));
+        titleRow.add(EchoUtil.createSmallLabel(contact3, "phone/mobile/email 3"));
+        titleRow.add(EchoUtil.createSmallLabel(remarks, "remarks"));
         EchoUtil.layoutAsButton(deletePerson);
         titleRow.add(deletePerson);
         topColumn.add(titleRow);

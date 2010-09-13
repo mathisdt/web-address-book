@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="print" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     family.`last_name` AS "family.lastName",
+     family.`street` AS "family.street",
+     family.`postal_code` AS "family.postalCode",
+     family.`city` AS "family.city",
+     family.`contact1` AS "family.contact1",
+     family.`contact2` AS "family.contact2",
+     family.`contact3` AS "family.contact3",
+     family.`remarks` AS "family.remarks",
+     person.`remarks` AS "person.remarks",
+     person.`contact3` AS "person.contact3",
+     person.`contact2` AS "person.contact2",
+     person.`contact1` AS "person.contact1",
+     person.`birthday` AS "person.birthday",
+     person.`last_name` AS "person.lastName",
+     person.`first_name` AS "person.firstName",
+     family.`id` AS "family.id",
+     person.`id` AS "person.id"
+FROM
+     `family` family INNER JOIN `person` person ON family.`id` = person.`family_id`]]>
+	</queryString>
+	<field name="family.lastName" class="java.lang.String"/>
+	<field name="family.street" class="java.lang.String"/>
+	<field name="family.postalCode" class="java.lang.String"/>
+	<field name="family.city" class="java.lang.String"/>
+	<field name="family.contact1" class="java.lang.String"/>
+	<field name="family.contact2" class="java.lang.String"/>
+	<field name="family.contact3" class="java.lang.String"/>
+	<field name="family.remarks" class="java.lang.String"/>
+	<field name="person.remarks" class="java.lang.String"/>
+	<field name="person.contact3" class="java.lang.String"/>
+	<field name="person.contact2" class="java.lang.String"/>
+	<field name="person.contact1" class="java.lang.String"/>
+	<field name="person.birthday" class="java.lang.String"/>
+	<field name="person.lastName" class="java.lang.String"/>
+	<field name="person.firstName" class="java.lang.String"/>
+	<field name="family.id" class="java.lang.Integer"/>
+	<field name="person.id" class="java.lang.Integer"/>
+	<group name="family_id">
+		<groupExpression><![CDATA[$F{family.id}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="4" width="188" height="16" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.lastName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="188" y="4" width="200" height="16" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.street}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="388" y="4" width="47" height="16" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.postalCode}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="435" y="4" width="120" height="16" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.city}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="108" y="21" width="149" height="16" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.contact1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="257" y="21" width="149" height="16" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.contact2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="406" y="21" width="149" height="16" isRemoveLineWhenBlank="true"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.contact3}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="555" height="1"/>
+				</line>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="241" splitType="Stretch">
+			<staticText>
+				<reportElement positionType="Float" x="0" y="0" width="318" height="30"/>
+				<textElement>
+					<font size="22" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Gemeindeverzeichnis]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="40" width="318" height="43"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Christliche Gemeinde Koinonia
+Calvary Chapel Hannover]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="83" width="318" height="71"/>
+				<textElement/>
+				<text><![CDATA[Herrenstr. 10 - 30159 Hannover
+Tel. Büro: 0511-1614643 - Fax 0511-1614639
+Konto-Nr. 616915 - EKK Hannover - BLZ 52060410
+
+Tel. Gemeindecafé - 0511-1319710]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="154" width="318" height="23"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Kindertagesstätte Löwenkinder]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="177" width="318" height="22"/>
+				<textElement/>
+				<text><![CDATA[Odeonstr. 6 - 30159 Hannover - Tel. 0511-18460]]></text>
+			</staticText>
+			<staticText>
+				<reportElement positionType="Float" x="0" y="211" width="555" height="21"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Bei Änderungen bitte das Büro benachrichtigen!]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement positionType="Float" x="318" y="1" width="237" height="198"/>
+				<imageExpression class="java.io.InputStream"><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("logo")]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="82" y="5" width="204" height="16" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.firstName}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="286" y="5" width="100" height="16" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.birthday}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="108" y="22" width="149" height="16" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.contact1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="257" y="22" width="149" height="16" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.contact2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="406" y="22" width="149" height="16" isRemoveLineWhenBlank="true"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.contact3}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="82" y="0" width="473" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<elementGroup>
+				<textField evaluationTime="Report">
+					<reportElement positionType="Float" x="515" y="5" width="40" height="20"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+			</elementGroup>
+			<textField>
+				<reportElement positionType="Float" x="435" y="5" width="80" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Seite "+$V{PAGE_NUMBER}+" von"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="5" width="318" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("date")]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

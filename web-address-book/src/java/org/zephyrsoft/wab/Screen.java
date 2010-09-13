@@ -85,7 +85,7 @@ public class Screen extends ContentPane {
 	
 	private void downloadPdf() {
 		// TODO move to controller
-		DownloadProvider provider = app.getPdfProvider();
+		DownloadProvider provider = new PdfProvider();
 		app.enqueueCommand(new DownloadCommand(provider));
 		    
 	}
