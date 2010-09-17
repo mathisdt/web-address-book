@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="lib/Echo3_FileTransfer_WebContainer_20100402.jar" sourcepath="lib/Echo3_FileTransfer_WebContainer_20100402-src.zip"/>
 	<classpathentry kind="lib" path="lib/echopoint-3.0.0b5.jar" sourcepath="lib/echopoint-3.0.0b5-src.zip"/>
 	<classpathentry kind="lib" path="lib/jasperreports-3.7.4.jar" sourcepath="lib/jasperreports-3.7.4-src.zip"/>
+	<classpathentry kind="lib" path="lib/SuperCSV-1.52.jar" sourcepath="lib/SuperCSV-1.52-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
