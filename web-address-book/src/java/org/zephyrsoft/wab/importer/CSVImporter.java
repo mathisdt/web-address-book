@@ -12,6 +12,9 @@ public class CSVImporter {
 	
 	/**
 	 * Import old data. Expects two parameters: 1. the family csv file and 2. the person csv file. 
+	 * 
+	 * ATTENTION: The csv files have to be in UTF-8 encoding!
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
