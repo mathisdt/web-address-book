@@ -3,12 +3,20 @@ package org.zephyrsoft.wab;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import org.zephyrsoft.wab.model.*;
+import org.zephyrsoft.wab.report.*;
+import org.zephyrsoft.wab.util.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.export.*;
+import net.sf.jasperreports.engine.util.*;
 import nextapp.echo.filetransfer.app.*;
 
 public class PdfProvider implements DownloadProvider {
 	
-	String fileName = "";
-	String printableDate = "";
+	private String fileName = "";
+	private String printableDate = "";
+	
+	private ByteArrayOutputStream outStream = null;
 	
 	public PdfProvider() {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
@@ -16,22 +24,35 @@ public class PdfProvider implements DownloadProvider {
 		Date date = new Date();
 		fileName = "Gemeindeverzeichnis-" + sdf1.format(date) + ".pdf";
 		printableDate = sdf2.format(date);
-		// TODO load all families and build the pdf
 		
-		
-		
-		
-		// REPORT_PARAMETER_MAP: "logo", "date"
-		
-		// hint: "person_first_name" has to contain also the last name (if filled and different from family's last name)!
-		
-		
-		
+		// load all families and build the pdf
+		try {
+			JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getResourceAsStream("/org/zephyrsoft/wab/report/print.jasper"));
+			
+			// add peremeters "logo" and "date"
+			Map<String, Object> parameters = new HashMap<String, Object>();
+			parameters.put("logo", getClass().getResourceAsStream("/org/zephyrsoft/wab/report/dove.jpg"));
+			parameters.put("date", "Stand: " + printableDate);
+			
+			JasperPrint jasperPrint = 
+				JasperFillManager.fillReport(jasperReport, parameters, new WABDataSource(DataUtil.find(Family.class).findList()));
+			
+			JRPdfExporter exporter = new JRPdfExporter();
+			
+			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+			outStream = new ByteArrayOutputStream();
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outStream);
+			
+			exporter.exportReport();
+			
+			
+		} catch (JRException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public String getContentType() {
-		// TODO
-		return null;
+		return "application/pdf";
 	}
 	
 	public String getFileName() {
@@ -39,13 +60,15 @@ public class PdfProvider implements DownloadProvider {
 	}
 	
 	public long getSize() {
-		// TODO
-		return 0;
+		if (outStream==null) {
+			return 0;
+		} else {
+			return outStream.size();
+		}
 	}
 	
 	public void writeFile(OutputStream out) throws IOException {
-		// TODO
-		
+		out.write(outStream.toByteArray());
 	}
 	
 }

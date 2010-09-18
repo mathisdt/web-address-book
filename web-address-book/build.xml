@@ -12,6 +12,8 @@
 		<include name="**/*gif" />
 		<include name="**/*jpg" />
 		<include name="**/*png" />
+		<include name="**/*jasper" />
+		<include name="**/*jrxml" />
 	</patternset>
 
 	<target name="clean" description="Clears all generated files, including build directories, distributables, and documentation.">

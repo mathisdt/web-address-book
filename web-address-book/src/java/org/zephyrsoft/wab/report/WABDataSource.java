@@ -50,15 +50,38 @@ public class WABDataSource implements JRDataSource {
 	}
 	
 	public Object getFieldValue(JRField jrField) throws JRException {
-		String[] dataPath = jrField.getName().split(".");
-		if (dataPath[0].equals("family")) {
-			// get family attribute
-			// TODO
+		String[] dataPath = jrField.getName().split("\\.");
+		if (dataPath.length==0) {
+			System.out.println("ill-named field: " + jrField.getName());
+			return null;
 		} else {
-			// get person attribute
-			// TODO
+			if (dataPath[0].equals("family")) {
+				// get family attribute
+				try {
+					return Family.class.getMethod(getGetterName(dataPath[1])).invoke(family);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return null;
+				}
+			} else {
+				// get person attribute
+				try {
+					// TODO "person_first_name" has to contain also the last name (if filled and different from family's last name)!
+					return Person.class.getMethod(getGetterName(dataPath[1])).invoke(person);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return null;
+				}
+			}
 		}
-		return null;
+	}
+	
+	private static String getGetterName(String fieldName) {
+		if (fieldName==null || fieldName.length()==0) {
+			return null;
+		} else {
+			return "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+		}
 	}
 	
 }

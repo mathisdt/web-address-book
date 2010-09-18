@@ -3,7 +3,7 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      family.`last_name` AS "family.lastName",
      family.`street` AS "family.street",
@@ -42,17 +42,19 @@ FROM
 	<field name="person.firstName" class="java.lang.String"/>
 	<field name="family.id" class="java.lang.Integer"/>
 	<field name="person.id" class="java.lang.Integer"/>
-	<group name="family_id">
+	<sortField name="family.lastName"/>
+	<sortField name="person.firstName"/>
+	<group name="family_id" keepTogether="true">
 		<groupExpression><![CDATA[$F{family.id}]]></groupExpression>
 		<groupHeader>
-			<band height="40">
+			<band height="38">
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="4" width="188" height="16" isRemoveLineWhenBlank="true"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="4" width="178" height="16" isRemoveLineWhenBlank="true"/>
 					<textElement/>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.lastName}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="188" y="4" width="200" height="16" isRemoveLineWhenBlank="true"/>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="178" y="4" width="210" height="16" isRemoveLineWhenBlank="true"/>
 					<textElement/>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.street}]]></textFieldExpression>
 				</textField>
@@ -67,27 +69,30 @@ FROM
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.city}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement positionType="Float" x="108" y="21" width="149" height="16" isRemoveLineWhenBlank="true"/>
+					<reportElement positionType="Float" x="82" y="21" width="157" height="16" isRemoveLineWhenBlank="true"/>
 					<textElement/>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.contact1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement positionType="Float" x="257" y="21" width="149" height="16" isRemoveLineWhenBlank="true"/>
+					<reportElement positionType="Float" x="236" y="21" width="157" height="16" isRemoveLineWhenBlank="true"/>
 					<textElement/>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.contact2}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement positionType="Float" x="406" y="21" width="149" height="16" isRemoveLineWhenBlank="true"/>
+					<reportElement positionType="Float" x="393" y="21" width="162" height="16" isRemoveLineWhenBlank="true"/>
 					<textElement/>
 					<textFieldExpression class="java.lang.String"><![CDATA[$F{family.contact3}]]></textFieldExpression>
 				</textField>
 				<line>
 					<reportElement x="0" y="0" width="555" height="1"/>
 				</line>
+				<line>
+					<reportElement positionType="Float" x="0" y="20" width="555" height="1" forecolor="#FFFFFF"/>
+				</line>
 			</band>
 		</groupHeader>
 		<groupFooter>
-			<band height="6"/>
+			<band/>
 		</groupFooter>
 	</group>
 	<background>
@@ -145,29 +150,29 @@ Tel. Gemeindecafé - 0511-1319710]]></text>
 		</band>
 	</title>
 	<detail>
-		<band height="40" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="82" y="5" width="204" height="16" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="82" y="5" width="96" height="16" isRemoveLineWhenBlank="true"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.firstName}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="286" y="5" width="100" height="16" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="178" y="5" width="58" height="16" isRemoveLineWhenBlank="true"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.birthday}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="108" y="22" width="149" height="16" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="236" y="5" width="110" height="16" isRemoveLineWhenBlank="true"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.contact1}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="257" y="22" width="149" height="16" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="346" y="5" width="111" height="16" isRemoveLineWhenBlank="true"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.contact2}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="406" y="22" width="149" height="16" isRemoveLineWhenBlank="true"/>
+				<reportElement positionType="Float" x="457" y="5" width="98" height="16" isRemoveLineWhenBlank="true"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{person.contact3}]]></textFieldExpression>
 			</textField>
