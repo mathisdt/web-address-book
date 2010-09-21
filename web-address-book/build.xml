@@ -37,7 +37,7 @@
 		<copy todir="${dir.build}">
 			<fileset dir="${dir.src.htdocs}" />
 		</copy>
-		<javac srcdir="${dir.src.app}" destdir="${dir.build}/WEB-INF/classes" debug="${debug}" deprecation="yes">
+		<javac includeAntRuntime="false" srcdir="${dir.src.app}" destdir="${dir.build}/WEB-INF/classes" debug="${debug}" deprecation="yes">
 			<classpath>
 				<fileset dir="${dir.lib}">
 					<include name="*.jar"/>
