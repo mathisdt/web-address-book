@@ -1,6 +1,7 @@
 package org.zephyrsoft.wab.report;
 
 import java.util.*;
+import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.model.*;
 import net.sf.jasperreports.engine.*;
 
@@ -50,12 +51,12 @@ public class WABDataSource implements JRDataSource {
 	}
 	
 	public Object getFieldValue(JRField jrField) throws JRException {
-		String[] dataPath = jrField.getName().split("\\.");
+		String[] dataPath = jrField.getName().split(Constants.REGEX_FULLSTOP);
 		if (dataPath.length==0) {
-			System.out.println("ill-named field: " + jrField.getName());
+			System.out.println(Constants.PROBLEM_WITH_FIELD_NAME + jrField.getName());
 			return null;
 		} else {
-			if (dataPath[0].equals("family")) {
+			if (dataPath[0].equals(Constants.ENTITY_FAMILY)) {
 				// get family attribute
 				try {
 					return Family.class.getMethod(getGetterName(dataPath[1])).invoke(family);
@@ -80,7 +81,7 @@ public class WABDataSource implements JRDataSource {
 		if (fieldName==null || fieldName.length()==0) {
 			return null;
 		} else {
-			return "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
+			return Constants.GET + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
 		}
 	}
 	

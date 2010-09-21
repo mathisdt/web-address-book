@@ -1,12 +1,15 @@
 package org.zephyrsoft.wab.test;
 
 import com.avaje.ebean.*;
+import org.junit.*;
+import static org.junit.Assert.*;
 import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.model.*;
 
 public class EbeanEntityTest {
 	
-	public static void main(String[] args) {
+	@Test
+	public void insertUpdateQueryDelete() {
 		
 		ContextListener cl = new ContextListener();
 		cl.contextInitialized(null);
@@ -29,15 +32,13 @@ public class EbeanEntityTest {
 			
 			//query
 			Family f2 = Ebean.find(Family.class, f.getId());
-			System.out.println("f:" + f.getLastName() + " / " + "f2:" + f2.getLastName());
+			assertEquals(f.getLastName(), f2.getLastName());
 			
 			// delete
-//			Ebean.delete(f);
-			
-			Ebean.commitTransaction();
+			Ebean.delete(f);
 			
 		} finally {
-			Ebean.endTransaction();
+			Ebean.rollbackTransaction();
 			cl.contextDestroyed(null);
 		}
 	}

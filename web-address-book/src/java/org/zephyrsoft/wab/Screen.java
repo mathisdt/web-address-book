@@ -30,7 +30,7 @@ public class Screen extends ContentPane {
         topColumn.setCellSpacing(new Extent(10));
         add(topColumn);
         Label title = new Label("Web Address Book");
-        title.setFont(new Font(new Typeface("Arial"), Font.BOLD + Font.UNDERLINE, new Extent(20)));
+        title.setFont(new Font(Font.ARIAL, Font.BOLD + Font.UNDERLINE, new Extent(20)));
         topColumn.add(title);
         downloadPdf = new Button("Download as PDF");
         EchoUtil.layoutAsButton(downloadPdf);

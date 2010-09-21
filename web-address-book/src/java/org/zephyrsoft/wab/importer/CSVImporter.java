@@ -74,7 +74,7 @@ public class CSVImporter {
 				DataUtil.endTransaction();
 			}
 			// stop ebean server and underlying structures
-			cl.contextInitialized(null);
+			cl.contextDestroyed(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

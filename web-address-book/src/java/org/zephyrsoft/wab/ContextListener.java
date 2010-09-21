@@ -31,31 +31,29 @@ public class ContextListener implements ServletContextListener {
 		if (_instance == null) {
 			_instance = this;
 		} else {
-			throw new IllegalStateException("another instance of this class already exists");
+			throw new IllegalStateException(Constants.ANOTHER_INSTANCE_EXISTS);
 		}
-		
-		System.out.println("============== initializing WAB context listener ==============");
 		
 		// get environment properties
 		Properties props = new Properties();
 		try {
-			InputStream is = getClass().getResourceAsStream("/environment.properties");
+			InputStream is = getClass().getResourceAsStream(Constants.ENVIRONMENT_PROPERTIES);
 			if (is!=null) {
 				props.load(is);
 			} else {
-				throw new IllegalStateException("could not find environment.properties");
+				throw new IllegalStateException(Constants.ENVIRONMENT_PROPERTIES_NOT_FOUND);
 			}
 		} catch (IOException e) {
-			throw new IllegalStateException("could not find environment.properties", e);
+			throw new IllegalStateException(Constants.ENVIRONMENT_PROPERTIES_NOT_FOUND, e);
 		}
-		String prop1 = props.getProperty("useDedicatedDatabase");
-		if (prop1!=null && prop1.trim().equalsIgnoreCase("true")) {
+		String prop1 = props.getProperty(Constants.USE_DEDICATED_DATABASE);
+		if (prop1!=null && prop1.trim().equalsIgnoreCase(Boolean.TRUE.toString())) {
 			useDedicatedDatabase = true;
 		}
 		
 		// get database name
 		String databaseName = null;
-		String prop2 = props.getProperty("databaseName");
+		String prop2 = props.getProperty(Constants.DATABASE_NAME);
 		if (prop2!=null) {
 			databaseName = prop2;
 		}
@@ -68,13 +66,13 @@ public class ContextListener implements ServletContextListener {
 			try {
 				server = Server.createTcpServer(); // use argument "-tcpAllowOthers" if all interfaces should be bound (and not only "localhost")
 				server.start();
-				System.out.println("started h2 server");
+				System.out.println(Constants.STARTED_H2_SERVER);
 			} catch (SQLException e) {
-				System.out.println("couldn't start h2 server - SQLException occurred");
+				System.out.println(Constants.COULD_NOT_START_H2_SERVER);
 				e.printStackTrace();
 			}
 		} else {
-			System.out.println("didn't start h2 server - it's not configured in environment.properties");
+			System.out.println(Constants.DID_NOT_START_H2_SERVER);
 		}
 	}
 
@@ -82,12 +80,12 @@ public class ContextListener implements ServletContextListener {
 		if (useDedicatedDatabase) {
 			if (server!=null) {
 				server.stop();
-				System.out.println("stopped h2 server");
+				System.out.println(Constants.STOPPED_H2_SERVER);
 			} else {
-				System.out.println("couldn't stop h2 server - reference was null");
+				System.out.println(Constants.COULD_NOT_STOP_H2_SERVER);
 			}
 		} else {
-			System.out.println("didn't stop h2 server - it's not configured in environment.properties");
+			System.out.println(Constants.DID_NOT_STOP_H2_SERVER);
 		}
 	}
 }

@@ -5,8 +5,6 @@ import nextapp.echo.app.Font.*;
 
 public class EchoUtil {
 	
-	public static final int KEYSTROKE_SEND_INTERVAL = 50;
-	
 	public static void layoutAsButton(Button button) {
 		button.setBackground(Color.LIGHTGRAY);
         button.setInsets(new Insets(7, 1));

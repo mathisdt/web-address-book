@@ -4,9 +4,10 @@ import java.sql.*;
 import java.util.*;
 import javax.persistence.*;
 import com.avaje.ebean.*;
+import org.zephyrsoft.wab.*;
 
 @Entity
-@Table(name="family")
+@Table(name=Constants.ENTITY_FAMILY)
 public class Family {
 	@Id
 	private Integer id;
@@ -22,7 +23,7 @@ public class Family {
 	private String contact3;
 	private String remarks;
 	
-	@OneToMany(targetEntity=Person.class, mappedBy="family", cascade=CascadeType.ALL)
+	@OneToMany(targetEntity=Person.class, mappedBy=Constants.ENTITY_FAMILY, cascade=CascadeType.ALL)
 	private List<Person> members = null;
 	
 	public Integer getId() {

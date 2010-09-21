@@ -47,14 +47,14 @@ public class FamilyPanel extends Panel {
 		personsColumn = new Column();
 		deleteFamily = new Button("delete family");
 		addPerson = new Button("add person");
-		lastName = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		street = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		postalCode = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		city = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		contact1 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		contact2 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		contact3 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		remarks = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		lastName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		street = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		postalCode = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		city = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		contact1 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		contact2 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		contact3 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		remarks = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		
 		// set start values
 		lastName.setText(family.getLastName());
@@ -114,14 +114,14 @@ public class FamilyPanel extends Panel {
         topColumn.add(detailColumn);
         
         // bind view to model
-        DataUtil.bindTextfield(lastName, family, "lastName");
-        DataUtil.bindTextfield(street, family, "street");
-        DataUtil.bindTextfield(postalCode, family, "postalCode");
-        DataUtil.bindTextfield(city, family, "city");
-        DataUtil.bindTextfield(contact1, family, "contact1");
-        DataUtil.bindTextfield(contact2, family, "contact2");
-        DataUtil.bindTextfield(contact3, family, "contact3");
-        DataUtil.bindTextfield(remarks, family, "remarks");
+        DataUtil.bindTextfield(lastName, family, Constants.ATTRIBUTE_LAST_NAME);
+        DataUtil.bindTextfield(street, family, Constants.ATTRIBUTE_STREET);
+        DataUtil.bindTextfield(postalCode, family, Constants.ATTRIBUTE_POSTAL_CODE);
+        DataUtil.bindTextfield(city, family, Constants.ATTRIBUTE_CITY);
+        DataUtil.bindTextfield(contact1, family, Constants.ATTRIBUTE_CONTACT1);
+        DataUtil.bindTextfield(contact2, family, Constants.ATTRIBUTE_CONTACT2);
+        DataUtil.bindTextfield(contact3, family, Constants.ATTRIBUTE_CONTACT3);
+        DataUtil.bindTextfield(remarks, family, Constants.ATTRIBUTE_REMARKS);
         
         // Actions
         addPerson.addActionListener(new ActionListener() {

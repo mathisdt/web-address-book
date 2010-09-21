@@ -39,13 +39,13 @@ public class PersonPanel extends Panel {
 		// create instances
 		titleRow = new Row();
 		deletePerson = new Button("delete person");
-		firstName = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		lastName = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		birthday = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		contact1 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		contact2 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		contact3 = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
-		remarks = new KeystrokeTextField(EchoUtil.KEYSTROKE_SEND_INTERVAL);
+		firstName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		lastName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		birthday = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		contact1 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		contact2 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		contact3 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
+		remarks = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		
 		// set start values
 		firstName.setText(person.getFirstName());
@@ -81,13 +81,13 @@ public class PersonPanel extends Panel {
         topColumn.add(titleRow);
         
         // bind view to model
-        DataUtil.bindTextfield(firstName, person, "firstName");
-        DataUtil.bindTextfield(lastName, person, "lastName");
-        DataUtil.bindTextfield(birthday, person, "birthday");
-        DataUtil.bindTextfield(contact1, person, "contact1");
-        DataUtil.bindTextfield(contact2, person, "contact2");
-        DataUtil.bindTextfield(contact3, person, "contact3");
-        DataUtil.bindTextfield(remarks, person, "remarks");
+        DataUtil.bindTextfield(firstName, person, Constants.ATTRIBUTE_FIRST_NAME);
+        DataUtil.bindTextfield(lastName, person, Constants.ATTRIBUTE_LAST_NAME);
+        DataUtil.bindTextfield(birthday, person, Constants.ATTRIBUTE_BIRTHDAY);
+        DataUtil.bindTextfield(contact1, person, Constants.ATTRIBUTE_CONTACT1);
+        DataUtil.bindTextfield(contact2, person, Constants.ATTRIBUTE_CONTACT2);
+        DataUtil.bindTextfield(contact3, person, Constants.ATTRIBUTE_CONTACT3);
+        DataUtil.bindTextfield(remarks, person, Constants.ATTRIBUTE_REMARKS);
         
         // Actions
         deletePerson.addActionListener(new ActionListener() {

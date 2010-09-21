@@ -2,9 +2,10 @@ package org.zephyrsoft.wab.model;
 
 import java.sql.*;
 import javax.persistence.*;
+import org.zephyrsoft.wab.*;
 
 @Entity
-@Table(name="person")
+@Table(name=Constants.ENTITY_PERSON)
 public class Person {
 	@Id
 	private Integer id;

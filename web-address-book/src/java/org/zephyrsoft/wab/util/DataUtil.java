@@ -89,7 +89,7 @@ public class DataUtil {
 				getter = instance.getClass().getMethod(getGetterName(property));
 				setter = instance.getClass().getMethod(getSetterName(property), String.class);
 			} catch (Exception e) {
-				throw new IllegalArgumentException("property could not be bound", e);
+				throw new IllegalArgumentException(Constants.PROPERTY_COULD_NOT_BE_BOUND, e);
 			}
 			// add myself as listener
 			textfield.addActionListener(this);
@@ -98,30 +98,25 @@ public class DataUtil {
 		}
 
 		public void propertyChange(PropertyChangeEvent evt) {
-			System.out.println("propertyChange start");
 			if (!changeInProgress) {
 				synchronized (this) {
-					System.out.println("propertyChange synchronized");
 					changeInProgress = true;
 					// set textfield
 					textfield.setText((String)evt.getNewValue());
 					changeInProgress = false;
 				}
 			}
-			System.out.println("propertyChange end");
 		}
 
 		public void actionPerformed(ActionEvent ev) {
-			System.out.println("actionPerformed start");
 			if (!changeInProgress) {
 				synchronized (this) {
-					System.out.println("actionPerformed synchronized");
 					changeInProgress = true;
 					// set bean property
 					try {
 						setter.invoke(instance, textfield.getText());
 					} catch (Exception e) {
-						throw new IllegalArgumentException("could not set bean property", e);
+						throw new IllegalArgumentException(Constants.COULD_NOT_SET_BEAN_PROPERTY, e);
 					}
 					// save bean
 					try {
@@ -132,29 +127,27 @@ public class DataUtil {
 							getEbeanServerInstance().refresh(instance);
 							String text = (String)getter.invoke(instance);
 							textfield.setText(text);
-							System.out.println("OptimisticLockException on " + instance + " - reset text to " + text);
 						} catch (Exception e) {
-							throw new IllegalArgumentException("could not get bean property", e);
+							throw new IllegalArgumentException(Constants.COULD_NOT_GET_BEAN_PROPERTY, e);
 						}
 					}
 					changeInProgress = false;
 				}
 			}
-			System.out.println("actionPerformed end");
 		}
 	}
 	
 	private static String getGetterName(String property) {
 		if (property==null || property.length()==0) {
-			throw new IllegalArgumentException("property name has to have at least one character");
+			throw new IllegalArgumentException(Constants.PROPERTY_NAME_LENGTH_PROBLEM);
 		}
-		return "get" + property.substring(0, 1).toUpperCase() + property.substring(1);
+		return Constants.GET + property.substring(0, 1).toUpperCase() + property.substring(1);
 	}
 	
 	private static String getSetterName(String property) {
 		if (property==null || property.length()==0) {
-			throw new IllegalArgumentException("property name has to have at least one character");
+			throw new IllegalArgumentException(Constants.PROPERTY_NAME_LENGTH_PROBLEM);
 		}
-		return "set" + property.substring(0, 1).toUpperCase() + property.substring(1);
+		return Constants.SET + property.substring(0, 1).toUpperCase() + property.substring(1);
 	}
 }
