@@ -168,9 +168,6 @@ public class Family implements Comparable<Family> {
 		if (members == null) {
 			return false;
 		}
-		if (o != null) {
-			Ebean.delete(o);
-		}
 		boolean returnValue = members.remove(o);
 		correctMemberOrderIfNecessary();
 		return returnValue;

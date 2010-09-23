@@ -31,6 +31,7 @@ public final class Constants {
 	public static final String ATTRIBUTE_LAST_NAME = "lastName";
 	public static final String ATTRIBUTE_FIRST_NAME = "firstName";
 	public static final String ATTRIBUTE_BIRTHDAY = "birthday";
+	public static final String ATTRIBUTE_MEMBERS = "members";
 	public static final String ENTITY_FAMILY = "family";
 	public static final String ENTITY_PERSON = "person";
 	public static final String REGEX_FULLSTOP = "\\.";

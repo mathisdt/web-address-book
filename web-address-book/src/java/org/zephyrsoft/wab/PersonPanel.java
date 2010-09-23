@@ -15,6 +15,8 @@ public class PersonPanel extends Panel {
 	private Row titleRow = null;
 	
 	private Button deletePerson = null;
+	private Button moveUp = null;
+	private Button moveDown = null;
 	
 	private TextField firstName = null;
 	private TextField lastName = null;
@@ -23,10 +25,12 @@ public class PersonPanel extends Panel {
 	private TextField contact2 = null;
 	private TextField contact3 = null;
 	private TextField remarks = null;
+
+	private final FamilyPanel parent;
 	
-	public PersonPanel(Person person) {
+	public PersonPanel(FamilyPanel parent, Person person) {
 		super();
-		
+		this.parent = parent;
 		this.person = person;
 		
 		if (this.person==null) {
@@ -39,6 +43,8 @@ public class PersonPanel extends Panel {
 		// create instances
 		titleRow = new Row();
 		deletePerson = new Button("delete person");
+		moveUp = new Button("move up");
+		moveDown = new Button("move down");
 		firstName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		lastName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		birthday = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
@@ -69,6 +75,15 @@ public class PersonPanel extends Panel {
 		contact2.setToolTipText("phone/mobile/email 2");
 		contact3.setToolTipText("phone/mobile/email 3");
 		remarks.setToolTipText("remarks");
+		
+		Column moveButtons = new Column();
+		moveButtons.setCellSpacing(new Extent(0));
+		EchoUtil.layoutAsButton(moveUp);
+		moveButtons.add(moveUp);
+        EchoUtil.layoutAsButton(moveDown);
+        moveButtons.add(moveDown);
+        titleRow.add(moveButtons);
+		
         titleRow.add(EchoUtil.createSmallLabel(firstName, "first name"));
         titleRow.add(EchoUtil.createSmallLabel(lastName, "last name"));
         titleRow.add(EchoUtil.createSmallLabel(birthday, "birthday"));
@@ -94,12 +109,49 @@ public class PersonPanel extends Panel {
 			private static final long serialVersionUID = -4798229206323253003L;
 			public void actionPerformed(ActionEvent e) {
 				try {
-					// delete person from database
+					// delete person from database after reloading it by ID (to prevent an OptimisticLockException)
 					DataUtil.beginTransaction();
-					DataUtil.delete(getPerson());
+					Person toDelete = DataUtil.find(Person.class, getPerson().getId());
+					if (toDelete != null) {
+						toDelete.getFamily().removeMember(toDelete);
+						DataUtil.delete(toDelete);
+						parent.reloadFamilyMembers();
+					}
 					DataUtil.commitTransaction();
 					// hide view
-					getParent().remove(PersonPanel.this);
+					parent.removePersonPanel(PersonPanel.this);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					DataUtil.endTransaction();
+				}
+			}
+		});
+        moveUp.addActionListener(new ActionListener() {
+			private static final long serialVersionUID = -4798229206323253005L;
+			public void actionPerformed(ActionEvent e) {
+				try {
+					// delete person from database
+					DataUtil.beginTransaction();
+					getPerson().getFamily().moveUp(getPerson());
+					DataUtil.commitTransaction();
+					parent.reorderPersonPanels();
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				} finally {
+					DataUtil.endTransaction();
+				}
+			}
+		});
+        moveDown.addActionListener(new ActionListener() {
+			private static final long serialVersionUID = -4798229206323253007L;
+			public void actionPerformed(ActionEvent e) {
+				try {
+					// delete person from database
+					DataUtil.beginTransaction();
+					getPerson().getFamily().moveDown(getPerson());
+					DataUtil.commitTransaction();
+					parent.reorderPersonPanels();
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} finally {
@@ -109,6 +161,11 @@ public class PersonPanel extends Panel {
 		});
 	}
 
+	public void checkButtonActivation() {
+		moveUp.setEnabled(getPerson().getFamily().mayMoveUp(getPerson()));
+		moveDown.setEnabled(getPerson().getFamily().mayMoveDown(getPerson()));
+	}
+	
 	public Person getPerson() {
 		return person;
 	}

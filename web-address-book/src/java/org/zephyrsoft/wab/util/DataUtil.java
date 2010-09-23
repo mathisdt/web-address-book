@@ -8,6 +8,7 @@ import javax.persistence.*;
 import com.avaje.ebean.*;
 import com.avaje.ebean.Query;
 import org.zephyrsoft.wab.*;
+import org.zephyrsoft.wab.model.*;
 import nextapp.echo.app.*;
 import nextapp.echo.app.event.*;
 
@@ -44,6 +45,10 @@ public class DataUtil {
 		return getEbeanServerInstance().find(beanType);
 	}
 
+	public static <T> T find(Class<T> beanType, Integer id) {
+		return getEbeanServerInstance().find(beanType, id);
+	}
+
 	public static Object nextId(Class<?> beanType) {
 		return getEbeanServerInstance().nextId(beanType);
 	}
@@ -58,6 +63,14 @@ public class DataUtil {
 
 	public static void update(Object bean) {
 		getEbeanServerInstance().update(bean);
+	}
+	
+	public static void refresh(Object bean) {
+		getEbeanServerInstance().refresh(bean);
+	}
+	
+	public static void refreshMany(Object bean, String propertyName) {
+		getEbeanServerInstance().refreshMany(bean, propertyName);
 	}
 
 	/**

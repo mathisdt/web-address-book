@@ -1,5 +1,6 @@
 package org.zephyrsoft.wab;
 
+import java.util.*;
 import echopoint.*;
 import org.zephyrsoft.wab.model.*;
 import org.zephyrsoft.wab.util.*;
@@ -8,7 +9,7 @@ import nextapp.echo.app.Border.Side;
 import nextapp.echo.app.event.*;
 
 public class FamilyPanel extends Panel {
-
+	
 	private static final long serialVersionUID = -7732074007710939064L;
 	
 	private Family family = null;
@@ -34,7 +35,7 @@ public class FamilyPanel extends Panel {
 		
 		this.family = family;
 		
-		if (this.family==null) {
+		if (this.family == null) {
 			this.family = new Family();
 		}
 		initView();
@@ -67,17 +68,21 @@ public class FamilyPanel extends Panel {
 		remarks.setText(family.getRemarks());
 		
 		// borders
-		Side[] border = new Side[] {new Side(new Extent(10), Color.YELLOW, Border.STYLE_SOLID), new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE), new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE), new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE)};
+		Side[] border =
+			new Side[] { new Side(new Extent(10), Color.YELLOW, Border.STYLE_SOLID),
+				new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE),
+				new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE),
+				new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE) };
 		setBorder(new Border(border));
 		setInsets(new Insets(new Extent(0), new Extent(0), new Extent(0), new Extent(10)));
 		
 		// top level container
 		Column topColumn = new Column();
-        topColumn.setCellSpacing(new Extent(10));
-        add(topColumn);
-        
-        // title row
-        lastName.setToolTipText("last name");
+		topColumn.setCellSpacing(new Extent(10));
+		add(topColumn);
+		
+		// title row
+		lastName.setToolTipText("last name");
 		street.setToolTipText("street");
 		postalCode.setToolTipText("postal code");
 		city.setToolTipText("city");
@@ -85,47 +90,48 @@ public class FamilyPanel extends Panel {
 		contact2.setToolTipText("phone/mobile/email 2");
 		contact3.setToolTipText("phone/mobile/email 3");
 		remarks.setToolTipText("remarks");
-        titleRow.add(EchoUtil.createSmallLabel(lastName, "last name"));
-        titleRow.add(EchoUtil.createSmallLabel(street, "street"));
-        titleRow.add(EchoUtil.createSmallLabel(postalCode, "postal code"));
-        titleRow.add(EchoUtil.createSmallLabel(city, "city"));
-        titleRow.add(EchoUtil.createSmallLabel(contact1, "phone/mobile/email 1"));
-        titleRow.add(EchoUtil.createSmallLabel(contact2, "phone/mobile/email 2"));
-        titleRow.add(EchoUtil.createSmallLabel(contact3, "phone/mobile/email 3"));
-        titleRow.add(EchoUtil.createSmallLabel(remarks, "remarks"));
-        EchoUtil.layoutAsButton(deleteFamily);
-        titleRow.add(deleteFamily);
-        topColumn.add(titleRow);
-        
-        // fill persons column
-        if (family.getMembers()!=null) {
-	        for (Person p : family.getMembers()) {
-	        	personsColumn.add(new PersonPanel(p));
-	        }
-        }
-        
-        // build details area
-        detailColumn.setInsets(new Insets(40, 0, 0, 0));
-        detailColumn.add(personsColumn);
-        EchoUtil.layoutAsButton(addPerson);
-        Row addPersonRow = new Row();
-        addPersonRow.add(addPerson);
-        detailColumn.add(addPersonRow);
-        topColumn.add(detailColumn);
-        
-        // bind view to model
-        DataUtil.bindTextfield(lastName, family, Constants.ATTRIBUTE_LAST_NAME);
-        DataUtil.bindTextfield(street, family, Constants.ATTRIBUTE_STREET);
-        DataUtil.bindTextfield(postalCode, family, Constants.ATTRIBUTE_POSTAL_CODE);
-        DataUtil.bindTextfield(city, family, Constants.ATTRIBUTE_CITY);
-        DataUtil.bindTextfield(contact1, family, Constants.ATTRIBUTE_CONTACT1);
-        DataUtil.bindTextfield(contact2, family, Constants.ATTRIBUTE_CONTACT2);
-        DataUtil.bindTextfield(contact3, family, Constants.ATTRIBUTE_CONTACT3);
-        DataUtil.bindTextfield(remarks, family, Constants.ATTRIBUTE_REMARKS);
-        
-        // Actions
-        addPerson.addActionListener(new ActionListener() {
+		titleRow.add(EchoUtil.createSmallLabel(lastName, "last name"));
+		titleRow.add(EchoUtil.createSmallLabel(street, "street"));
+		titleRow.add(EchoUtil.createSmallLabel(postalCode, "postal code"));
+		titleRow.add(EchoUtil.createSmallLabel(city, "city"));
+		titleRow.add(EchoUtil.createSmallLabel(contact1, "phone/mobile/email 1"));
+		titleRow.add(EchoUtil.createSmallLabel(contact2, "phone/mobile/email 2"));
+		titleRow.add(EchoUtil.createSmallLabel(contact3, "phone/mobile/email 3"));
+		titleRow.add(EchoUtil.createSmallLabel(remarks, "remarks"));
+		EchoUtil.layoutAsButton(deleteFamily);
+		titleRow.add(deleteFamily);
+		topColumn.add(titleRow);
+		
+		// fill persons column
+		if (family.getMembers() != null) {
+			for (Person p : family.getMembers()) {
+				personsColumn.add(new PersonPanel(FamilyPanel.this, p));
+			}
+		}
+		
+		// build details area
+		detailColumn.setInsets(new Insets(40, 0, 0, 0));
+		detailColumn.add(personsColumn);
+		EchoUtil.layoutAsButton(addPerson);
+		Row addPersonRow = new Row();
+		addPersonRow.add(addPerson);
+		detailColumn.add(addPersonRow);
+		topColumn.add(detailColumn);
+		
+		// bind view to model
+		DataUtil.bindTextfield(lastName, family, Constants.ATTRIBUTE_LAST_NAME);
+		DataUtil.bindTextfield(street, family, Constants.ATTRIBUTE_STREET);
+		DataUtil.bindTextfield(postalCode, family, Constants.ATTRIBUTE_POSTAL_CODE);
+		DataUtil.bindTextfield(city, family, Constants.ATTRIBUTE_CITY);
+		DataUtil.bindTextfield(contact1, family, Constants.ATTRIBUTE_CONTACT1);
+		DataUtil.bindTextfield(contact2, family, Constants.ATTRIBUTE_CONTACT2);
+		DataUtil.bindTextfield(contact3, family, Constants.ATTRIBUTE_CONTACT3);
+		DataUtil.bindTextfield(remarks, family, Constants.ATTRIBUTE_REMARKS);
+		
+		// Actions
+		addPerson.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = -4798229206323253003L;
+			
 			public void actionPerformed(ActionEvent e) {
 				try {
 					// add new person to this family
@@ -133,10 +139,11 @@ public class FamilyPanel extends Panel {
 					DataUtil.beginTransaction();
 					person = new Person();
 					getFamily().addMember(person);
+					DataUtil.save(person);
 					DataUtil.save(getFamily());
 					DataUtil.commitTransaction();
 					// add view for new person
-					personsColumn.add(new PersonPanel(person));
+					personsColumn.add(new PersonPanel(FamilyPanel.this, person));
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} finally {
@@ -144,13 +151,17 @@ public class FamilyPanel extends Panel {
 				}
 			}
 		});
-        deleteFamily.addActionListener(new ActionListener() {
+		deleteFamily.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = -4798229206323253001L;
+			
 			public void actionPerformed(ActionEvent e) {
 				try {
-					// delete family from database
+					// delete family from database after reloading it by ID (to prevent an OptimisticLockException)
 					DataUtil.beginTransaction();
-					DataUtil.delete(getFamily());
+					Family toDelete = DataUtil.find(Family.class, getFamily().getId());
+					if (toDelete != null) {
+						DataUtil.delete(toDelete);
+					}
 					DataUtil.commitTransaction();
 					// hide view for this family
 					getParent().remove(FamilyPanel.this);
@@ -162,8 +173,37 @@ public class FamilyPanel extends Panel {
 			}
 		});
 	}
-
+	
+	public void reorderPersonPanels() {
+		Component[] compononts = personsColumn.getComponents();
+		Map<Person, PersonPanel> person2personPanel = new TreeMap<Person, PersonPanel>();
+		for (int i = 0; i < compononts.length; i++) {
+			PersonPanel pp = (PersonPanel) compononts[i];
+			person2personPanel.put(pp.getPerson(), pp);
+		}
+		for (Person p : person2personPanel.keySet()) {
+			PersonPanel pp = person2personPanel.get(p);
+			if (p.getOrdering() != indexOf(pp)) {
+				// rearrange the panel
+				personsColumn.add(pp, p.getOrdering());
+			}
+			pp.checkButtonActivation();
+		}
+	}
+	
 	public Family getFamily() {
 		return family;
+	}
+
+	public void reloadFamilyMembers() {
+		try {
+			DataUtil.refreshMany(getFamily(), Constants.ATTRIBUTE_MEMBERS);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void removePersonPanel(PersonPanel personPanel) {
+		personsColumn.remove(personPanel);
 	}
 }
