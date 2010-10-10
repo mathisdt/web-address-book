@@ -1,17 +1,19 @@
 package org.zephyrsoft.wab.util;
 
 import java.beans.*;
-import java.io.*;
 import java.lang.reflect.*;
-import java.util.*;
 import javax.persistence.*;
 import com.avaje.ebean.*;
 import com.avaje.ebean.Query;
-import org.zephyrsoft.wab.*;
-import org.zephyrsoft.wab.model.*;
 import nextapp.echo.app.*;
 import nextapp.echo.app.event.*;
+import org.zephyrsoft.wab.*;
 
+/**
+ * utility for data access
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 public class DataUtil {
 	
 	private static EbeanServer getEbeanServerInstance() {
@@ -86,11 +88,12 @@ public class DataUtil {
 	
 	private static class TextfieldBinding implements PropertyChangeListener, ActionListener {
 		private static final long serialVersionUID = 2299534198052432679L;
+		
 		private TextField textfield = null;
 		private Object instance = null;
 		private String property = null;
-		private Method getter = null;
-		private Method setter = null;
+		private transient Method getter = null;
+		private transient Method setter = null;
 		private PropertyChangeSupport beanPropertyChangeSupport = null;
 		private boolean changeInProgress = false;
 		
@@ -111,8 +114,8 @@ public class DataUtil {
 		}
 
 		public void propertyChange(PropertyChangeEvent evt) {
-			if (!changeInProgress) {
-				synchronized (this) {
+			synchronized (this) {
+				if (!changeInProgress) {
 					changeInProgress = true;
 					// set textfield
 					textfield.setText((String)evt.getNewValue());
@@ -122,8 +125,8 @@ public class DataUtil {
 		}
 
 		public void actionPerformed(ActionEvent ev) {
-			if (!changeInProgress) {
-				synchronized (this) {
+			synchronized (this) {
+				if (!changeInProgress) {
 					changeInProgress = true;
 					// set bean property
 					try {

@@ -6,6 +6,11 @@ import org.zephyrsoft.wab.util.*;
 import nextapp.echo.app.*;
 import nextapp.echo.app.event.*;
 
+/**
+ * 
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 public class PersonPanel extends Panel {
 
 	private static final long serialVersionUID = -5291254570310018206L;
@@ -42,9 +47,11 @@ public class PersonPanel extends Panel {
 	private void initView() {
 		// create instances
 		titleRow = new Row();
-		deletePerson = new Button("delete person");
-		moveUp = new Button("move up");
-		moveDown = new Button("move down");
+		deletePerson = EchoUtil.createButton(null, "delete person", Constants.BUTTON_DELETE_PERSON);
+		moveUp = new Button();
+		moveUp.setToolTipText("move up");
+		moveDown = new Button();
+		moveDown.setToolTipText("move down");
 		firstName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		lastName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		birthday = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
@@ -78,9 +85,7 @@ public class PersonPanel extends Panel {
 		
 		Column moveButtons = new Column();
 		moveButtons.setCellSpacing(new Extent(0));
-		EchoUtil.layoutAsButton(moveUp);
 		moveButtons.add(moveUp);
-        EchoUtil.layoutAsButton(moveDown);
         moveButtons.add(moveDown);
         titleRow.add(moveButtons);
 		
@@ -91,7 +96,6 @@ public class PersonPanel extends Panel {
         titleRow.add(EchoUtil.createSmallLabel(contact2, "phone/mobile/email 2"));
         titleRow.add(EchoUtil.createSmallLabel(contact3, "phone/mobile/email 3"));
         titleRow.add(EchoUtil.createSmallLabel(remarks, "remarks"));
-        EchoUtil.layoutAsButton(deletePerson);
         titleRow.add(deletePerson);
         topColumn.add(titleRow);
         
@@ -103,6 +107,8 @@ public class PersonPanel extends Panel {
         DataUtil.bindTextfield(contact2, person, Constants.ATTRIBUTE_CONTACT2);
         DataUtil.bindTextfield(contact3, person, Constants.ATTRIBUTE_CONTACT3);
         DataUtil.bindTextfield(remarks, person, Constants.ATTRIBUTE_REMARKS);
+        
+		checkButtonActivation();
         
         // Actions
         deletePerson.addActionListener(new ActionListener() {
@@ -133,7 +139,9 @@ public class PersonPanel extends Panel {
 				try {
 					// delete person from database
 					DataUtil.beginTransaction();
-					getPerson().getFamily().moveUp(getPerson());
+					Person switchedWith = getPerson().getFamily().moveUp(getPerson());
+					DataUtil.save(switchedWith);
+					DataUtil.save(getPerson());
 					DataUtil.commitTransaction();
 					parent.reorderPersonPanels();
 				} catch (Exception ex) {
@@ -149,7 +157,9 @@ public class PersonPanel extends Panel {
 				try {
 					// delete person from database
 					DataUtil.beginTransaction();
-					getPerson().getFamily().moveDown(getPerson());
+					Person switchedWith = getPerson().getFamily().moveDown(getPerson());
+					DataUtil.save(switchedWith);
+					DataUtil.save(getPerson());
 					DataUtil.commitTransaction();
 					parent.reorderPersonPanels();
 				} catch (Exception ex) {
@@ -161,12 +171,18 @@ public class PersonPanel extends Panel {
 		});
 	}
 
-	public void checkButtonActivation() {
-		moveUp.setEnabled(getPerson().getFamily().mayMoveUp(getPerson()));
-		moveDown.setEnabled(getPerson().getFamily().mayMoveDown(getPerson()));
+	public final void checkButtonActivation() {
+		boolean mayMoveUp = getPerson().getFamily().mayMoveUp(getPerson());
+		boolean mayMoveDown = getPerson().getFamily().mayMoveDown(getPerson());
+		// set state
+		moveUp.setEnabled(mayMoveUp);
+		moveDown.setEnabled(mayMoveDown);
+		// set icons
+		moveUp.setIcon(mayMoveUp ? EchoUtil.createImage(Constants.BUTTON_UP_GREEN) : EchoUtil.createImage(Constants.BUTTON_UP_GREY));
+		moveDown.setIcon(mayMoveDown ? EchoUtil.createImage(Constants.BUTTON_DOWN_GREEN) : EchoUtil.createImage(Constants.BUTTON_DOWN_GREY));
 	}
 	
-	public Person getPerson() {
+	public final Person getPerson() {
 		return person;
 	}
 }

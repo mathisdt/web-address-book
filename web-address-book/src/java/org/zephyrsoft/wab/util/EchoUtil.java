@@ -1,11 +1,33 @@
 package org.zephyrsoft.wab.util;
 
+import org.zephyrsoft.wab.*;
 import nextapp.echo.app.*;
-import nextapp.echo.app.Font.*;
 
+/**
+ * utility for routine Echo3 tasks
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 public class EchoUtil {
 	
-	public static void layoutAsButton(Button button) {
+	public static Button createButton(String text, String tooltip, String image) {
+		Button ret = new Button();
+		layoutAsButton(ret);
+		if (text!=null) {
+			ret.setText(text);
+		}
+		if (tooltip!=null) {
+			ret.setToolTipText(tooltip);
+		}
+		if (image!=null) {
+			ret.setIcon(createImage(image));
+			// set distance between image and text
+			ret.setIconTextMargin(new Extent(5));
+		}
+		return ret;
+	}
+	
+	private static void layoutAsButton(Button button) {
 		button.setBackground(Color.LIGHTGRAY);
         button.setInsets(new Insets(7, 1));
         button.setBorder(new Border(new Extent(1), Color.DARKGRAY, Border.STYLE_OUTSET));
@@ -29,6 +51,10 @@ public class EchoUtil {
 		ret.add(componentRow);
 		
 		return ret;
+	}
+	
+	public static ResourceImageReference createImage(String image) {
+		return new ResourceImageReference(image, new Extent(Constants.ICON_PIXEL_SIZE), new Extent(Constants.ICON_PIXEL_SIZE));
 	}
 	
 }

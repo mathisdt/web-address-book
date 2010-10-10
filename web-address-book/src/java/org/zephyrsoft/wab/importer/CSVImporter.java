@@ -8,6 +8,11 @@ import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.model.*;
 import org.zephyrsoft.wab.util.*;
 
+/**
+ * 
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 public class CSVImporter {
 	
 	/**
@@ -34,7 +39,8 @@ public class CSVImporter {
 				DataUtil.endTransaction();
 			}
 			// now populate the families from the CSV file
-			inFile = new CsvListReader(new FileReader(args[0]), CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
+			FileReader reader = new FileReader(args[0]);
+			inFile = new CsvListReader(reader, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
 			Map<Integer, Family> oldIdToNewFamily = new HashMap<Integer, Family>();
 			List<String> line;
 			try {
@@ -75,7 +81,7 @@ public class CSVImporter {
 			}
 			// stop ebean server and underlying structures
 			cl.contextDestroyed(null);
-		} catch (Exception e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
 			try {

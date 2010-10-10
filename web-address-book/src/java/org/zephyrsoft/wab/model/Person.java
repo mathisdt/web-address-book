@@ -1,13 +1,21 @@
 package org.zephyrsoft.wab.model;
 
+import java.io.*;
 import java.sql.*;
 import javax.persistence.*;
 import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.util.*;
 
+/**
+ * 
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 @Entity
 @Table(name = Constants.ENTITY_PERSON)
-public class Person implements Comparable<Person> {
+public class Person extends ComparableBean<Person> implements Serializable {
+	private static final long serialVersionUID = -3541739218662947140L;
+	
 	@Id
 	private Integer id;
 	@Version
@@ -113,10 +121,31 @@ public class Person implements Comparable<Person> {
 		this.ordering = ordering;
 	}
 	
+	@Override
 	public int compareTo(Person o) {
-		if (o==null) {
+		if (o == null) {
 			return -1;
 		}
-		return CompareUtil.compareWithNullsLast(this.getOrdering(), o.getOrdering());
+		int ret = CompareUtil.compareWithNullsLast(this.getOrdering(), o.getOrdering());
+		if (ret == 0) {
+			CompareUtil.compareWithNullsLast(this.getFirstName(), o.getFirstName());
+		}
+		return ret;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Person) {
+			return 0 == compareTo((Person) o);
+		} else {
+			return super.equals(o);
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		// nothing special required, use superclass implementation
+		return super.hashCode();
+	}
+	
 }

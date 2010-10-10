@@ -1,6 +1,7 @@
 package org.zephyrsoft.wab;
 
 import java.util.*;
+import java.util.Map.Entry;
 import echopoint.*;
 import org.zephyrsoft.wab.model.*;
 import org.zephyrsoft.wab.util.*;
@@ -8,6 +9,11 @@ import nextapp.echo.app.*;
 import nextapp.echo.app.Border.Side;
 import nextapp.echo.app.event.*;
 
+/**
+ * 
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 public class FamilyPanel extends Panel {
 	
 	private static final long serialVersionUID = -7732074007710939064L;
@@ -41,13 +47,13 @@ public class FamilyPanel extends Panel {
 		initView();
 	}
 	
-	private void initView() {
+	private final void initView() {
 		// create instances
 		titleRow = new Row();
 		detailColumn = new Column();
 		personsColumn = new Column();
-		deleteFamily = new Button("delete family");
-		addPerson = new Button("add person");
+		deleteFamily = EchoUtil.createButton(null, "delete family", Constants.BUTTON_DELETE_FAMILY);
+		addPerson = EchoUtil.createButton("add person", null, Constants.BUTTON_ADD_PERSON);
 		lastName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		street = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		postalCode = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
@@ -98,7 +104,6 @@ public class FamilyPanel extends Panel {
 		titleRow.add(EchoUtil.createSmallLabel(contact2, "phone/mobile/email 2"));
 		titleRow.add(EchoUtil.createSmallLabel(contact3, "phone/mobile/email 3"));
 		titleRow.add(EchoUtil.createSmallLabel(remarks, "remarks"));
-		EchoUtil.layoutAsButton(deleteFamily);
 		titleRow.add(deleteFamily);
 		topColumn.add(titleRow);
 		
@@ -112,7 +117,6 @@ public class FamilyPanel extends Panel {
 		// build details area
 		detailColumn.setInsets(new Insets(40, 0, 0, 0));
 		detailColumn.add(personsColumn);
-		EchoUtil.layoutAsButton(addPerson);
 		Row addPersonRow = new Row();
 		addPersonRow.add(addPerson);
 		detailColumn.add(addPersonRow);
@@ -181,8 +185,9 @@ public class FamilyPanel extends Panel {
 			PersonPanel pp = (PersonPanel) compononts[i];
 			person2personPanel.put(pp.getPerson(), pp);
 		}
-		for (Person p : person2personPanel.keySet()) {
-			PersonPanel pp = person2personPanel.get(p);
+		for (Entry<Person, PersonPanel> p2pp : person2personPanel.entrySet()) {
+			Person p = p2pp.getKey();
+			PersonPanel pp = p2pp.getValue();
 			if (p.getOrdering() != indexOf(pp)) {
 				// rearrange the panel
 				personsColumn.add(pp, p.getOrdering());
@@ -191,7 +196,7 @@ public class FamilyPanel extends Panel {
 		}
 	}
 	
-	public Family getFamily() {
+	public final Family getFamily() {
 		return family;
 	}
 

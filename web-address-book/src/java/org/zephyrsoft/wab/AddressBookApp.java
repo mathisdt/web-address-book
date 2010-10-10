@@ -2,6 +2,11 @@ package org.zephyrsoft.wab;
 
 import nextapp.echo.app.*;
 
+/**
+ * instance of the address book application
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 public class AddressBookApp extends ApplicationInstance {
     private static final long serialVersionUID = 6414042684791930462L;
 

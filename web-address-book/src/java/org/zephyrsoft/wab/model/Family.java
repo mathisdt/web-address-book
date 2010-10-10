@@ -1,20 +1,26 @@
 package org.zephyrsoft.wab.model;
 
+import java.io.*;
 import java.sql.*;
 import java.util.*;
 import javax.persistence.*;
-import com.avaje.ebean.*;
 import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.util.*;
 
+/**
+ * 
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 @Entity
 @Table(name = Constants.ENTITY_FAMILY)
-public class Family implements Comparable<Family> {
+public class Family extends ComparableBean<Family> implements Serializable {
+	private static final long serialVersionUID = 4985298161866949004L;
+	
 	@Id
 	private Integer id;
 	@Version
 	private Timestamp lastUpdate;
-	
 	private String lastName;
 	private String street;
 	private String postalCode;
@@ -24,6 +30,7 @@ public class Family implements Comparable<Family> {
 	private String contact3;
 	private String remarks;
 	
+	@OrderBy("ordering, firstName")
 	@OneToMany(targetEntity = Person.class, mappedBy = Constants.ENTITY_FAMILY, cascade = CascadeType.ALL)
 	private List<Person> members = null;
 	
@@ -111,12 +118,10 @@ public class Family implements Comparable<Family> {
 		members = new ArrayList<Person>();
 	}
 	
-	private void correctMemberOrderIfNecessary() {
+	private void setMemberOrdering() {
 		for (int i = 0; i < members.size(); i++) {
 			Person p = members.get(i);
-			if (p.getOrdering() == null || p.getOrdering().intValue() != i) {
-				p.setOrdering(i);
-			}
+			p.setOrdering(i);
 		}
 	}
 	
@@ -126,7 +131,7 @@ public class Family implements Comparable<Family> {
 	
 	public void setMembers(List<Person> members) {
 		this.members = members;
-		correctMemberOrderIfNecessary();
+		setMemberOrdering();
 	}
 	
 	public boolean addMember(Person e) {
@@ -134,7 +139,7 @@ public class Family implements Comparable<Family> {
 			initMembers();
 		}
 		boolean returnValue = members.add(e);
-		correctMemberOrderIfNecessary();
+		setMemberOrdering();
 		return returnValue;
 	}
 	
@@ -169,7 +174,7 @@ public class Family implements Comparable<Family> {
 			return false;
 		}
 		boolean returnValue = members.remove(o);
-		correctMemberOrderIfNecessary();
+		setMemberOrdering();
 		return returnValue;
 	}
 	
@@ -197,25 +202,33 @@ public class Family implements Comparable<Family> {
 		return containsMember(p) && members != null && members.lastIndexOf(p) < members.size() - 1;
 	}
 	
-	public void moveUp(Person p) {
+	public Person moveUp(Person p) {
 		if (mayMoveUp(p)) {
 			int sourceIndex = members.indexOf(p);
 			int targetIndex = sourceIndex - 1;
 			Person toSwitch = members.get(targetIndex);
 			members.set(targetIndex, p);
 			members.set(sourceIndex, toSwitch);
-			correctMemberOrderIfNecessary();
+			setMemberOrdering();
+			// return the person which changed places with the given person
+			return toSwitch;
+		} else {
+			return null;
 		}
 	}
 	
-	public void moveDown(Person p) {
+	public Person moveDown(Person p) {
 		if (mayMoveDown(p)) {
 			int sourceIndex = members.lastIndexOf(p);
 			int targetIndex = sourceIndex + 1;
 			Person toSwitch = members.get(targetIndex);
 			members.set(targetIndex, p);
 			members.set(sourceIndex, toSwitch);
-			correctMemberOrderIfNecessary();
+			setMemberOrdering();
+			// return the person which changed places with the given person
+			return toSwitch;
+		} else {
+			return null;
 		}
 	}
 	
@@ -223,6 +236,7 @@ public class Family implements Comparable<Family> {
 	 * Compare this family to another. This is done by comparing the last names
 	 * and then the street and then the contact fields (null values are always last).
 	 */
+	@Override
 	public int compareTo(Family o) {
 		// other object is null => other object is larger than this
 		if (o == null) {
@@ -230,21 +244,37 @@ public class Family implements Comparable<Family> {
 		}
 		// now compare by lastName, street, contact1, contact2, contact3
 		int returnValue = 0;
-		if (returnValue==0) {
-			returnValue=CompareUtil.compareWithNullsLast(getLastName(), o.getLastName());
+		if (returnValue == 0) {
+			returnValue = CompareUtil.compareWithNullsLast(getLastName(), o.getLastName());
 		}
-		if (returnValue==0) {
-			returnValue=CompareUtil.compareWithNullsLast(getStreet(), o.getStreet());
+		if (returnValue == 0) {
+			returnValue = CompareUtil.compareWithNullsLast(getStreet(), o.getStreet());
 		}
-		if (returnValue==0) {
-			returnValue=CompareUtil.compareWithNullsLast(getContact1(), o.getContact1());
+		if (returnValue == 0) {
+			returnValue = CompareUtil.compareWithNullsLast(getContact1(), o.getContact1());
 		}
-		if (returnValue==0) {
-			returnValue=CompareUtil.compareWithNullsLast(getContact2(), o.getContact2());
+		if (returnValue == 0) {
+			returnValue = CompareUtil.compareWithNullsLast(getContact2(), o.getContact2());
 		}
-		if (returnValue==0) {
-			returnValue=CompareUtil.compareWithNullsLast(getContact3(), o.getContact3());
+		if (returnValue == 0) {
+			returnValue = CompareUtil.compareWithNullsLast(getContact3(), o.getContact3());
 		}
 		return returnValue;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Family) {
+			return 0 == compareTo((Family) o);
+		} else {
+			return super.equals(o);
+		}
+	}
+
+	@Override
+	public int hashCode() {
+		// nothing special required, use superclass implementation
+		return super.hashCode();
+	}
+	
 }

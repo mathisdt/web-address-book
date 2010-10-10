@@ -6,14 +6,28 @@ import static org.junit.Assert.*;
 import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.model.*;
 
+/**
+ * 
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 public class EbeanEntityTest {
+	
+	private static ContextListener cl;
+
+	@BeforeClass
+	public static void setup() {
+		cl = new ContextListener();
+		cl.contextInitialized(null);
+	}
+	
+	@AfterClass
+	public static void teardown() {
+		cl.contextDestroyed(null);
+	}
 	
 	@Test
 	public void insertUpdateQueryDelete() {
-		
-		ContextListener cl = new ContextListener();
-		cl.contextInitialized(null);
-		
 		try {
 			Ebean.beginTransaction();
 			
@@ -39,7 +53,6 @@ public class EbeanEntityTest {
 			
 		} finally {
 			Ebean.rollbackTransaction();
-			cl.contextDestroyed(null);
 		}
 	}
 	

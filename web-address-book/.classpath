@@ -33,5 +33,6 @@
 	<classpathentry kind="lib" path="lib/asm-xml-3.3.jar" sourcepath="lib/asm-3.3-src.zip"/>
 	<classpathentry kind="lib" path="lib/iText-2.1.7.jar" sourcepath="lib/iText-2.1.7-src.zip"/>
 	<classpathentry kind="lib" path="lib/junit-4.8.2.jar" sourcepath="lib/junit-4.8.2-src.zip"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar" sourcepath="lib/log4j-1.2.16-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

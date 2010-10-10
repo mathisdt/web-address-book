@@ -1,17 +1,19 @@
 package org.zephyrsoft.wab;
 
-import java.io.*;
 import java.util.*;
-import com.avaje.ebean.*;
-import com.avaje.ebeaninternal.server.lib.cron.*;
-import org.zephyrsoft.wab.model.*;
-import org.zephyrsoft.wab.util.*;
 import nextapp.echo.app.*;
-import nextapp.echo.app.Border.*;
-import nextapp.echo.app.Font.*;
+import nextapp.echo.app.Border.Side;
 import nextapp.echo.app.event.*;
 import nextapp.echo.filetransfer.app.*;
+import org.apache.commons.collections.list.*;
+import org.zephyrsoft.wab.model.*;
+import org.zephyrsoft.wab.util.*;
 
+/**
+ * 
+ * 
+ * @author Mathis Dirksen-Thedens
+ */
 public class Screen extends ContentPane {
 	
 	private static final long serialVersionUID = 3483818110434112144L;
@@ -32,16 +34,14 @@ public class Screen extends ContentPane {
         Label title = new Label("Web Address Book");
         title.setFont(new Font(Font.ARIAL, Font.BOLD + Font.UNDERLINE, new Extent(20)));
         topColumn.add(title);
-        downloadPdf = new Button("Download as PDF");
-        EchoUtil.layoutAsButton(downloadPdf);
+        downloadPdf = EchoUtil.createButton("Download as PDF", null, Constants.BUTTON_REPORT);
         downloadPdf.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = 9132114868976616925L;
 			public void actionPerformed(ActionEvent e) {
 				downloadPdf();
 			}
 		});
-        addFamily = new Button("add family");
-        EchoUtil.layoutAsButton(addFamily);
+        addFamily = EchoUtil.createButton("add family", null, Constants.BUTTON_ADD_FAMILY);
         addFamily.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = 9132114868976616923L;
 			public void actionPerformed(ActionEvent e) {
@@ -71,6 +71,7 @@ public class Screen extends ContentPane {
         topColumn.add(data);
         
         List<Family> families = DataUtil.createQuery(Family.class).findList();
+        Collections.sort(families);
         
         for (Family f : families) {
         	FamilyPanel panel = new FamilyPanel(f);
