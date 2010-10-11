@@ -15,7 +15,7 @@ import org.zephyrsoft.wab.report.*;
 import org.zephyrsoft.wab.util.*;
 
 /**
- * 
+ * provider for a downloadable PDF file containing all data from the address book
  * 
  * @author Mathis Dirksen-Thedens
  */

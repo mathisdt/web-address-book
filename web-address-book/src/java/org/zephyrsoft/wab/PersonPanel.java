@@ -7,7 +7,7 @@ import nextapp.echo.app.*;
 import nextapp.echo.app.event.*;
 
 /**
- * 
+ * container for the UI elements of a person (as member of a family)
  * 
  * @author Mathis Dirksen-Thedens
  */

@@ -8,7 +8,7 @@ import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.util.*;
 
 /**
- * 
+ * family data bean
  * 
  * @author Mathis Dirksen-Thedens
  */

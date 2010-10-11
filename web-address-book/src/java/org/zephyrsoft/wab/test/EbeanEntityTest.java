@@ -7,7 +7,7 @@ import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.model.*;
 
 /**
- * 
+ * tests the persistence framework
  * 
  * @author Mathis Dirksen-Thedens
  */

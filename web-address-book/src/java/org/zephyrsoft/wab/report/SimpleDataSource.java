@@ -4,7 +4,7 @@ import java.util.*;
 import net.sf.jasperreports.engine.*;
 
 /**
- * 
+ * simple data source which holds all data in maps with strings as keys
  * 
  * @author Mathis Dirksen-Thedens
  */

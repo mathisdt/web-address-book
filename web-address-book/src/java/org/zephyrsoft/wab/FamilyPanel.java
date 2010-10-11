@@ -10,7 +10,7 @@ import nextapp.echo.app.Border.Side;
 import nextapp.echo.app.event.*;
 
 /**
- * 
+ * container for the UI elements of a family (including any member's UI elements as sub-panels) 
  * 
  * @author Mathis Dirksen-Thedens
  */

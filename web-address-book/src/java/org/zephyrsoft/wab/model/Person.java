@@ -7,7 +7,7 @@ import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.util.*;
 
 /**
- * 
+ * person data bean (a person is always member of a family)
  * 
  * @author Mathis Dirksen-Thedens
  */

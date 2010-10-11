@@ -10,7 +10,7 @@ import org.zephyrsoft.wab.model.*;
 import org.zephyrsoft.wab.util.*;
 
 /**
- * 
+ * container for the whole application's UI
  * 
  * @author Mathis Dirksen-Thedens
  */

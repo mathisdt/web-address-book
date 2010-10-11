@@ -1,7 +1,7 @@
 package org.zephyrsoft.wab;
 
 /**
- * 
+ * controller for the web address book
  * 
  * @author Mathis Dirksen-Thedens
  */

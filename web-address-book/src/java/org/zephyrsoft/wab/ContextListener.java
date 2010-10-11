@@ -9,7 +9,7 @@ import org.apache.log4j.*;
 import org.h2.tools.*;
 
 /**
- * 
+ * central class for initializing the environment (init logging, load properties, init persistence)
  * 
  * @author Mathis Dirksen-Thedens
  */

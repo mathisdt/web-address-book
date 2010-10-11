@@ -9,7 +9,7 @@ import org.zephyrsoft.wab.model.*;
 import org.zephyrsoft.wab.util.*;
 
 /**
- * 
+ * importer for legacy data into the web address book
  * 
  * @author Mathis Dirksen-Thedens
  */

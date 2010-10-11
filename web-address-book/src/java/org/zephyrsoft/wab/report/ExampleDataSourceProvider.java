@@ -9,7 +9,7 @@ import org.zephyrsoft.wab.*;
 import org.zephyrsoft.wab.model.*;
 
 /**
- * 
+ * DataSourceProvider for designing the reports with iReport
  * 
  * @author Mathis Dirksen-Thedens
  */

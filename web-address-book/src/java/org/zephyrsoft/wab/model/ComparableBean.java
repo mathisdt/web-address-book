@@ -1,7 +1,7 @@
 package org.zephyrsoft.wab.model;
 
 /**
- * 
+ * superclass for any data beans unsed in this applications
  * 
  * @author Mathis Dirksen-Thedens
  */

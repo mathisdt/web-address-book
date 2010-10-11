@@ -6,7 +6,7 @@ import org.junit.*;
 import org.zephyrsoft.wab.*;
 
 /**
- * 
+ * tests the database connection directly using SQL
  * 
  * @author Mathis Dirksen-Thedens
  */
