@@ -18,6 +18,14 @@
 		<include name="**/*jrxml" />
 	</patternset>
 
+	<taskdef name="jrc" classname="net.sf.jasperreports.ant.JRAntCompileTask"> 
+	  <classpath>
+	    <fileset dir="./lib">
+	      <include name="**/*.jar"/>
+	    </fileset>
+	  </classpath>
+	</taskdef>
+	
 	<target name="clean" description="Clears all generated files, including build directories, distributables, and documentation.">
 		<delete dir="${dir.build}" />
 		<delete dir="${dir.war}" />
@@ -46,6 +54,13 @@
 				</fileset>
 			</classpath>
 		</javac>
+		<jrc srcdir="${dir.src.app}/org/zephyrsoft/wab/report" includes="*.jrxml">
+			<classpath>
+				<fileset dir="${dir.lib}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+		</jrc>
 		<copy todir="${dir.build}/WEB-INF/classes">
 			<fileset dir="${dir.src.app}">
 				<patternset refid="fileset.resources" />

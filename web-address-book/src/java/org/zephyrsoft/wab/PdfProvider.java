@@ -40,6 +40,7 @@ public class PdfProvider implements DownloadProvider {
 			Map<String, Object> parameters = new HashMap<String, Object>();
 			parameters.put(Constants.LOGO, getClass().getResourceAsStream(Constants.LOGO_IMAGE));
 			parameters.put(Constants.DATE, "Stand: " + printableDate);
+			parameters.put(Constants.PERSON_SUBREPORT, ReportLoader.loadLayout(Constants.PERSON));
 			
 			// the sorting of the families is done inside buildDataSource()
 			JRDataSource dataSource = buildDataSource();

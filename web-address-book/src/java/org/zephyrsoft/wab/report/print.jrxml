@@ -3,8 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/daten/source/web-address-book/src/java/org/zephyrsoft/wab/report/"]]></defaultValueExpression>
+	<parameter name="PERSON_SUBREPORT_DESIGN" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false">
+		<parameterDescription><![CDATA[layout for the "person" subreport]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[]]>
@@ -114,10 +115,10 @@ Tel. Gemeindecafé - 0511-1319710]]></text>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{contact3}]]></textFieldExpression>
 			</textField>
-			<subreport>
+			<subreport isUsingCache="true">
 				<reportElement positionType="Float" x="1" y="34" width="555" height="14" isPrintWhenDetailOverflows="true"/>
 				<dataSourceExpression><![CDATA[$F{members}]]></dataSourceExpression>
-				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "person.jasper"]]></subreportExpression>
+				<subreportExpression class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{PERSON_SUBREPORT_DESIGN}]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
