@@ -11,6 +11,14 @@ import nextapp.echo.app.*;
 public class EchoUtil {
 	
 	public static Button createButton(String text, String tooltip, String image) {
+		ResourceImageReference img = null;
+		if (image!=null) {
+			img = createImage(image);
+		}
+		return createButton(text, tooltip, img);
+	}
+	
+	public static Button createButton(String text, String tooltip, ResourceImageReference image) {
 		Button ret = new Button();
 		layoutAsButton(ret);
 		if (text!=null) {
@@ -20,7 +28,7 @@ public class EchoUtil {
 			ret.setToolTipText(tooltip);
 		}
 		if (image!=null) {
-			ret.setIcon(createImage(image));
+			ret.setIcon(image);
 			// set distance between image and text
 			ret.setIconTextMargin(new Extent(5));
 		}

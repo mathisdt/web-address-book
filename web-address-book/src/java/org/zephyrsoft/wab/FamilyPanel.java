@@ -35,11 +35,14 @@ public class FamilyPanel extends Panel {
 	private TextField contact2 = null;
 	private TextField contact3 = null;
 	private TextField remarks = null;
+
+	private final EchoElementStore elements;
 	
-	public FamilyPanel(Family family) {
+	public FamilyPanel(Family family, EchoElementStore elements) {
 		super();
 		
 		this.family = family;
+		this.elements = elements;
 		
 		if (this.family == null) {
 			this.family = new Family();
@@ -52,8 +55,8 @@ public class FamilyPanel extends Panel {
 		titleRow = new Row();
 		detailColumn = new Column();
 		personsColumn = new Column();
-		deleteFamily = EchoUtil.createButton(null, "delete family", Constants.BUTTON_DELETE_FAMILY);
-		addPerson = EchoUtil.createButton("add person", null, Constants.BUTTON_ADD_PERSON);
+		deleteFamily = EchoUtil.createButton(null, "delete family", (ResourceImageReference)elements.get(Constants.BUTTON_DELETE_FAMILY));
+		addPerson = EchoUtil.createButton("add person", null, (ResourceImageReference)elements.get(Constants.BUTTON_ADD_PERSON));
 		lastName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		street = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		postalCode = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
@@ -110,7 +113,7 @@ public class FamilyPanel extends Panel {
 		// fill persons column
 		if (family.getMembers() != null) {
 			for (Person p : family.getMembers()) {
-				personsColumn.add(new PersonPanel(FamilyPanel.this, p));
+				personsColumn.add(new PersonPanel(FamilyPanel.this, elements, p));
 			}
 		}
 		
@@ -147,7 +150,7 @@ public class FamilyPanel extends Panel {
 					DataUtil.save(getFamily());
 					DataUtil.commitTransaction();
 					// add view for new person
-					personsColumn.add(new PersonPanel(FamilyPanel.this, person));
+					personsColumn.add(new PersonPanel(FamilyPanel.this, elements, person));
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} finally {

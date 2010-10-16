@@ -18,6 +18,8 @@ public class Screen extends ContentPane {
 	
 	private static final long serialVersionUID = 3483818110434112144L;
 	
+	private EchoElementStore elements = null;
+	
 	private AddressBookApp app = null;
 	
 	private Button downloadPdf = null;
@@ -27,6 +29,7 @@ public class Screen extends ContentPane {
 	public Screen(AddressBookApp app) {
 		super();
         this.app = app;
+        initReusableElements();
         Column topColumn = new Column();
         topColumn.setInsets(new Insets(30));
         topColumn.setCellSpacing(new Extent(10));
@@ -53,7 +56,7 @@ public class Screen extends ContentPane {
 					DataUtil.save(family);
 					DataUtil.commitTransaction();
 					// add view for new family
-					data.add(new FamilyPanel(family));
+					data.add(new FamilyPanel(family, elements));
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} finally {
@@ -74,7 +77,7 @@ public class Screen extends ContentPane {
         Collections.sort(families);
         
         for (Family f : families) {
-        	FamilyPanel panel = new FamilyPanel(f);
+        	FamilyPanel panel = new FamilyPanel(f, elements);
         	data.add(panel);
         }
         
@@ -84,6 +87,17 @@ public class Screen extends ContentPane {
         topColumn.add(bottomRow);
 	}
 	
+	private void initReusableElements() {
+		elements = new EchoElementStore();
+		elements.put(Constants.BUTTON_UP_GREEN, EchoUtil.createImage(Constants.BUTTON_UP_GREEN));
+		elements.put(Constants.BUTTON_UP_GREY, EchoUtil.createImage(Constants.BUTTON_UP_GREY));
+		elements.put(Constants.BUTTON_DOWN_GREEN, EchoUtil.createImage(Constants.BUTTON_DOWN_GREEN));
+		elements.put(Constants.BUTTON_DOWN_GREY, EchoUtil.createImage(Constants.BUTTON_DOWN_GREY));
+		elements.put(Constants.BUTTON_DELETE_FAMILY, EchoUtil.createImage(Constants.BUTTON_DELETE_FAMILY));
+		elements.put(Constants.BUTTON_ADD_PERSON, EchoUtil.createImage(Constants.BUTTON_ADD_PERSON));
+		elements.put(Constants.BUTTON_DELETE_PERSON, EchoUtil.createImage(Constants.BUTTON_DELETE_PERSON));
+	}
+
 	private void downloadPdf() {
 		// TODO move to controller
 		DownloadProvider provider = new PdfProvider();

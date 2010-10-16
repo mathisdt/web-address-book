@@ -32,10 +32,13 @@ public class PersonPanel extends Panel {
 	private TextField remarks = null;
 
 	private final FamilyPanel parent;
+
+	private final EchoElementStore elements;
 	
-	public PersonPanel(FamilyPanel parent, Person person) {
+	public PersonPanel(FamilyPanel parent, EchoElementStore elements, Person person) {
 		super();
 		this.parent = parent;
+		this.elements = elements;
 		this.person = person;
 		
 		if (this.person==null) {
@@ -47,7 +50,7 @@ public class PersonPanel extends Panel {
 	private void initView() {
 		// create instances
 		titleRow = new Row();
-		deletePerson = EchoUtil.createButton(null, "delete person", Constants.BUTTON_DELETE_PERSON);
+		deletePerson = EchoUtil.createButton(null, "delete person", (ResourceImageReference)elements.get(Constants.BUTTON_DELETE_PERSON));
 		moveUp = new Button();
 		moveUp.setToolTipText("move up");
 		moveDown = new Button();
