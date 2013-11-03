@@ -1,12 +1,12 @@
 package org.zephyrsoft.wab.report;
 
-import java.beans.*;
-import java.util.*;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.*;
-import net.sf.jasperreports.engine.xml.*;
-import org.zephyrsoft.wab.*;
-import org.zephyrsoft.wab.model.*;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRDataSourceProvider;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRField;
+import net.sf.jasperreports.engine.JasperReport;
+
+import org.zephyrsoft.wab.Constants;
 
 /**
  * DataSourceProvider for designing the reports with iReport
@@ -14,11 +14,11 @@ import org.zephyrsoft.wab.model.*;
  * @author Mathis Dirksen-Thedens
  */
 public class ExampleDataSourceProvider implements JRDataSourceProvider {
-	
+
 	public ExampleDataSourceProvider() {
 		// nothing to do
 	}
-	
+
 	@Override
 	public JRDataSource create(JasperReport report) throws JRException {
 		SimpleDataSource families = new SimpleDataSource();
@@ -35,20 +35,20 @@ public class ExampleDataSourceProvider implements JRDataSourceProvider {
 		families.put(person1);
 		return families;
 	}
-	
+
 	@Override
 	public void dispose(JRDataSource dataSource) throws JRException {
 		// nothing to do
 	}
-	
+
 	@Override
 	public boolean supportsGetFieldsOperation() {
 		return false;
 	}
-	
+
 	@Override
 	public JRField[] getFields(JasperReport report) throws JRException {
 		throw new UnsupportedOperationException();
 	}
-	
+
 }
