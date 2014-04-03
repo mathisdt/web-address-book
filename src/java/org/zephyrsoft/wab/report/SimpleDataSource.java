@@ -1,7 +1,14 @@
 package org.zephyrsoft.wab.report;
 
-import java.util.*;
-import net.sf.jasperreports.engine.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRField;
+import net.sf.jasperreports.engine.JRRewindableDataSource;
 
 /**
  * simple data source which holds all data in maps with strings as keys
@@ -21,7 +28,7 @@ public final class SimpleDataSource implements JRRewindableDataSource {
 	}
 	
 	public SimpleDataSource(String keyName) {
-		this.data = new ArrayList<Map<String, Object>>();
+		this.data = new ArrayList<>();
 		this.keyName = keyName;
 	}
 	
@@ -30,7 +37,7 @@ public final class SimpleDataSource implements JRRewindableDataSource {
 	}
 	
 	public void beginNewRow() {
-		currentWriteEntry = new HashMap<String, Object>();
+		currentWriteEntry = new HashMap<>();
 		data.add(currentWriteEntry);
 	}
 	

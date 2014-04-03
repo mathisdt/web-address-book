@@ -1,11 +1,20 @@
 package org.zephyrsoft.wab.model;
 
-import java.io.*;
-import java.sql.*;
-import java.util.*;
-import javax.persistence.*;
-import org.zephyrsoft.wab.*;
-import org.zephyrsoft.wab.util.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+import org.zephyrsoft.wab.Constants;
+import org.zephyrsoft.wab.util.CompareUtil;
 
 /**
  * family data bean
@@ -115,7 +124,7 @@ public class Family extends ComparableBean<Family> implements Serializable {
 	}
 	
 	private void initMembers() {
-		members = new ArrayList<Person>();
+		members = new ArrayList<>();
 	}
 	
 	private void setMemberOrdering() {
@@ -270,7 +279,7 @@ public class Family extends ComparableBean<Family> implements Serializable {
 			return super.equals(o);
 		}
 	}
-
+	
 	@Override
 	public int hashCode() {
 		// nothing special required, use superclass implementation

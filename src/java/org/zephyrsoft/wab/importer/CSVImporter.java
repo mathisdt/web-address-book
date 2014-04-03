@@ -1,12 +1,18 @@
 package org.zephyrsoft.wab.importer;
 
-import java.io.*;
-import java.util.*;
-import org.supercsv.io.*;
-import org.supercsv.prefs.*;
-import org.zephyrsoft.wab.*;
-import org.zephyrsoft.wab.model.*;
-import org.zephyrsoft.wab.util.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.supercsv.io.CsvListReader;
+import org.supercsv.io.ICsvListReader;
+import org.supercsv.prefs.CsvPreference;
+import org.zephyrsoft.wab.ContextListener;
+import org.zephyrsoft.wab.model.Family;
+import org.zephyrsoft.wab.model.Person;
+import org.zephyrsoft.wab.util.DataUtil;
 
 /**
  * importer for legacy data into the web address book
@@ -16,7 +22,7 @@ import org.zephyrsoft.wab.util.*;
 public class CSVImporter {
 	
 	/**
-	 * Import old data. Expects two parameters: 1. the family csv file and 2. the person csv file. 
+	 * Import old data. Expects two parameters: 1. the family csv file and 2. the person csv file.
 	 * 
 	 * ATTENTION: The csv files have to be in UTF-8 encoding!
 	 * 
@@ -41,7 +47,7 @@ public class CSVImporter {
 			// now populate the families from the CSV file
 			FileReader reader = new FileReader(args[0]);
 			inFile = new CsvListReader(reader, CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
-			Map<Integer, Family> oldIdToNewFamily = new HashMap<Integer, Family>();
+			Map<Integer, Family> oldIdToNewFamily = new HashMap<>();
 			List<String> line;
 			try {
 				DataUtil.beginTransaction();
@@ -85,7 +91,7 @@ public class CSVImporter {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (inFile!=null) {
+				if (inFile != null) {
 					inFile.close();
 				}
 			} catch (IOException e) {

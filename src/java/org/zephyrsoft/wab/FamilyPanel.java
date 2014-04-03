@@ -1,16 +1,34 @@
 package org.zephyrsoft.wab;
 
-import java.util.*;
+import java.util.Map;
 import java.util.Map.Entry;
-import echopoint.*;
-import org.zephyrsoft.wab.model.*;
-import org.zephyrsoft.wab.util.*;
-import nextapp.echo.app.*;
+import java.util.TreeMap;
+
+import nextapp.echo.app.Border;
 import nextapp.echo.app.Border.Side;
-import nextapp.echo.app.event.*;
+import nextapp.echo.app.Button;
+import nextapp.echo.app.Color;
+import nextapp.echo.app.Column;
+import nextapp.echo.app.Component;
+import nextapp.echo.app.Extent;
+import nextapp.echo.app.Insets;
+import nextapp.echo.app.Panel;
+import nextapp.echo.app.ResourceImageReference;
+import nextapp.echo.app.Row;
+import nextapp.echo.app.TextField;
+import nextapp.echo.app.event.ActionEvent;
+import nextapp.echo.app.event.ActionListener;
+
+import org.zephyrsoft.wab.model.Family;
+import org.zephyrsoft.wab.model.Person;
+import org.zephyrsoft.wab.util.DataUtil;
+import org.zephyrsoft.wab.util.EchoElementStore;
+import org.zephyrsoft.wab.util.EchoUtil;
+
+import echopoint.KeystrokeTextField;
 
 /**
- * container for the UI elements of a family (including any member's UI elements as sub-panels) 
+ * container for the UI elements of a family (including any member's UI elements as sub-panels)
  * 
  * @author Mathis Dirksen-Thedens
  */
@@ -35,7 +53,7 @@ public class FamilyPanel extends Panel {
 	private TextField contact2 = null;
 	private TextField contact3 = null;
 	private TextField remarks = null;
-
+	
 	private final EchoElementStore elements;
 	
 	public FamilyPanel(Family family, EchoElementStore elements) {
@@ -55,8 +73,10 @@ public class FamilyPanel extends Panel {
 		titleRow = new Row();
 		detailColumn = new Column();
 		personsColumn = new Column();
-		deleteFamily = EchoUtil.createButton(null, "delete family", (ResourceImageReference)elements.get(Constants.BUTTON_DELETE_FAMILY));
-		addPerson = EchoUtil.createButton("add person", null, (ResourceImageReference)elements.get(Constants.BUTTON_ADD_PERSON));
+		deleteFamily = EchoUtil.createButton(null, "delete family", (ResourceImageReference) elements
+			.get(Constants.BUTTON_DELETE_FAMILY));
+		addPerson = EchoUtil.createButton("add person", null, (ResourceImageReference) elements
+			.get(Constants.BUTTON_ADD_PERSON));
 		lastName = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		street = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		postalCode = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
@@ -77,11 +97,10 @@ public class FamilyPanel extends Panel {
 		remarks.setText(family.getRemarks());
 		
 		// borders
-		Side[] border =
-			new Side[] { new Side(new Extent(10), Color.YELLOW, Border.STYLE_SOLID),
-				new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE),
-				new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE),
-				new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE) };
+		Side[] border = new Side[] { new Side(new Extent(10), Color.YELLOW, Border.STYLE_SOLID),
+			new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE),
+			new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE),
+			new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE) };
 		setBorder(new Border(border));
 		setInsets(new Insets(new Extent(0), new Extent(0), new Extent(0), new Extent(10)));
 		
@@ -139,6 +158,7 @@ public class FamilyPanel extends Panel {
 		addPerson.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = -4798229206323253003L;
 			
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					// add new person to this family
@@ -161,6 +181,7 @@ public class FamilyPanel extends Panel {
 		deleteFamily.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = -4798229206323253001L;
 			
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					// delete family from database after reloading it by ID (to prevent an OptimisticLockException)
@@ -183,7 +204,7 @@ public class FamilyPanel extends Panel {
 	
 	public void reorderPersonPanels() {
 		Component[] compononts = personsColumn.getComponents();
-		Map<Person, PersonPanel> person2personPanel = new TreeMap<Person, PersonPanel>();
+		Map<Person, PersonPanel> person2personPanel = new TreeMap<>();
 		for (int i = 0; i < compononts.length; i++) {
 			PersonPanel pp = (PersonPanel) compononts[i];
 			person2personPanel.put(pp.getPerson(), pp);
@@ -202,7 +223,7 @@ public class FamilyPanel extends Panel {
 	public final Family getFamily() {
 		return family;
 	}
-
+	
 	public void reloadFamilyMembers() {
 		try {
 			DataUtil.refreshMany(getFamily(), Constants.ATTRIBUTE_MEMBERS);
@@ -210,7 +231,7 @@ public class FamilyPanel extends Panel {
 			ex.printStackTrace();
 		}
 	}
-
+	
 	public void removePersonPanel(PersonPanel personPanel) {
 		personsColumn.remove(personPanel);
 	}
