@@ -1,38 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/java"/>
-	<classpathentry kind="lib" path="lib/Echo3_App_20100402.jar" sourcepath="lib/Echo3_App_20100402-src.zip"/>
-	<classpathentry kind="lib" path="lib/Echo3_Extras_App_20100402.jar" sourcepath="lib/Echo3_Extras_App_20100402-src.zip"/>
-	<classpathentry kind="lib" path="lib/Echo3_Extras_WebContainer_20100402.jar" sourcepath="lib/Echo3_Extras_WebContainer_20100402-src.zip"/>
-	<classpathentry kind="lib" path="lib/Echo3_WebContainer_20100402.jar" sourcepath="lib/Echo3_WebContainer_20100402-src.zip"/>
-	<classpathentry kind="lib" path="lib/jsp-api-2.0.jar" sourcepath="lib/jsp-api-2.0-src.zip"/>
-	<classpathentry kind="lib" path="lib/servlet-api-2.4.jar" sourcepath="lib/servlet-api-2.4-src.zip"/>
-	<classpathentry kind="lib" path="lib/jta-1.1.jar"/>
-	<classpathentry kind="lib" path="lib/persistence-api-1.0.jar" sourcepath="lib/persistence-api-1.0-src.zip"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.12.jar" sourcepath="lib/mysql-connector-java-5.1.12-src.zip"/>
-	<classpathentry kind="lib" path="lib/h2-1.2.132.jar" sourcepath="lib/h2-1.2.132-src.zip"/>
-	<classpathentry kind="lib" path="lib/Echo3_FileTransfer_App_20100402.jar" sourcepath="lib/Echo3_FileTransfer_App_20100402-src.zip"/>
-	<classpathentry kind="lib" path="lib/Echo3_FileTransfer_Model_20100402.jar" sourcepath="lib/Echo3_FileTransfer_Model_20100402-src.zip"/>
-	<classpathentry kind="lib" path="lib/Echo3_FileTransfer_Receiver_20100402.jar" sourcepath="lib/Echo3_FileTransfer_Receiver_20100402-src.zip"/>
-	<classpathentry kind="lib" path="lib/Echo3_FileTransfer_WebContainer_20100402.jar" sourcepath="lib/Echo3_FileTransfer_WebContainer_20100402-src.zip"/>
-	<classpathentry kind="lib" path="lib/echopoint-3.0.0b5.jar" sourcepath="lib/echopoint-3.0.0b5-src.zip"/>
-	<classpathentry kind="lib" path="lib/jasperreports-3.7.4.jar" sourcepath="lib/jasperreports-3.7.4-src.zip"/>
-	<classpathentry kind="lib" path="lib/SuperCSV-1.52.jar" sourcepath="lib/SuperCSV-1.52-src.zip"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar" sourcepath="lib/commons-logging-1.1.1-src.zip"/>
-	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar" sourcepath="lib/commons-collections-3.2.1-src.zip"/>
-	<classpathentry kind="lib" path="lib/commons-beanutils-1.8.3.jar" sourcepath="lib/commons-beanutils-1.8.3-src.zip"/>
-	<classpathentry kind="lib" path="lib/commons-digester-2.0.jar" sourcepath="lib/commons-digester-2.0-src.zip"/>
-	<classpathentry kind="lib" path="lib/groovy-1.7.5.jar" sourcepath="lib/groovy-1.7.5-src.zip"/>
-	<classpathentry kind="lib" path="lib/asm-3.3.jar" sourcepath="lib/asm-3.3-src.zip"/>
-	<classpathentry kind="lib" path="lib/asm-analysis-3.3.jar" sourcepath="lib/asm-3.3-src.zip"/>
-	<classpathentry kind="lib" path="lib/asm-commons-3.3.jar" sourcepath="lib/asm-3.3-src.zip"/>
-	<classpathentry kind="lib" path="lib/asm-tree-3.3.jar" sourcepath="lib/asm-3.3-src.zip"/>
-	<classpathentry kind="lib" path="lib/asm-util-3.3.jar" sourcepath="lib/asm-3.3-src.zip"/>
-	<classpathentry kind="lib" path="lib/asm-xml-3.3.jar" sourcepath="lib/asm-3.3-src.zip"/>
-	<classpathentry kind="lib" path="lib/iText-2.1.7.jar" sourcepath="lib/iText-2.1.7-src.zip"/>
-	<classpathentry kind="lib" path="lib/junit-4.8.2.jar" sourcepath="lib/junit-4.8.2-src.zip"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar" sourcepath="lib/log4j-1.2.16-src.zip"/>
-	<classpathentry kind="lib" path="lib/ebean-2.7.3.jar" sourcepath="lib/ebean-2.7.3-src.zip"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>
