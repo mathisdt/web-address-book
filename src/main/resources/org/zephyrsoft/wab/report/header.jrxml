@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="header"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="595"
+		 pageHeight="421"
+		 columnWidth="555"
+		 columnSpacing="0"
+		 leftMargin="20"
+		 rightMargin="20"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.zoom" value="1.0" />
+	<property name="ireport.x" value="0" />
+	<property name="ireport.y" value="0" />
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="PERSON_SUBREPORT_DESIGN" isForPrompting="false" class="net.sf.jasperreports.engine.JasperReport">
+		<parameterDescription><![CDATA[layout for the "person" subreport]]></parameterDescription>
+	</parameter>
+
+	<field name="lastName" class="java.lang.String"/>
+	<field name="street" class="java.lang.String"/>
+	<field name="postalCode" class="java.lang.String"/>
+	<field name="city" class="java.lang.String"/>
+	<field name="contact1" class="java.lang.String"/>
+	<field name="contact2" class="java.lang.String"/>
+	<field name="contact3" class="java.lang.String"/>
+	<field name="members" class="net.sf.jasperreports.engine.JRDataSource"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="234"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="328"
+						height="30"
+						key="staticText"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font size="22" isBold="true" isUnderline="true"/>
+					</textElement>
+				<text><![CDATA[Gemeindeverzeichnis]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="40"
+						width="328"
+						height="43"
+						key="staticText"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Christliche Gemeinde Koinonia
+Calvary Chapel Hannover]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="83"
+						width="328"
+						height="71"
+						key="staticText"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Herrenstr. 10 - 30159 Hannover - office@koinonia-gemeinde.de
+Tel. Büro: 0511-1614643 - Fax 0511-1614639
+IBAN: DE76 5206 0410 0000 6169 15 / BIC: GENODEF1EK1
+
+Tel. Gemeindecafé - 0511-1319710]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="154"
+						width="328"
+						height="23"
+						key="staticText"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Kindertagesstätte Löwenkinder]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="177"
+						width="328"
+						height="22"
+						key="staticText"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Odeonstr. 6 - 30159 Hannover - 0511-18460 - 0160-1008660]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="211"
+						width="555"
+						height="18"
+						key="staticText"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font isItalic="true"/>
+					</textElement>
+				<text><![CDATA[Bei Änderungen bitte das Büro benachrichtigen!]]></text>
+				</staticText>
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="328"
+						y="1"
+						width="227"
+						height="198"
+						key="image"
+						positionType="Float"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.io.InputStream"><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("logo")]]></imageExpression>
+				</image>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>
