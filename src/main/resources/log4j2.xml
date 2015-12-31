@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d %-5p %C: %m%n" />
+		</Console>
+	</Appenders>
+
+	<Loggers>
+		<Logger name="net.sf.jasperreports" level="WARN" />
+	
+		<Root level="debug">
+			<AppenderRef ref="CONSOLE" />
+		</Root>
+	</Loggers>
+
+</Configuration>
