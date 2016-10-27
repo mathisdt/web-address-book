@@ -14,7 +14,7 @@ branches:
 before_script:
 - export TZ=Europe/Berlin
 
-script: mvn clean verify
+script: mvn --settings maven-settings.xml clean verify
 
 deploy:
   provider: releases
