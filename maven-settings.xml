@@ -4,21 +4,12 @@
 	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
 		http://maven.apache.org/xsd/settings-1.0.0.xsd">
 
-	<profiles>
-		<profile>
-			<id>with-zephyrsoft-mirror</id>
-			<mirrors>
-				<mirror>
-					<id>nexus</id>
-					<mirrorOf>*</mirrorOf>
-					<url>https://dev.zephyrsoft.org/nexus/content/groups/public</url>
-				</mirror>
-			</mirrors>
-		</profile>
-	</profiles>
-
-	<activeProfiles>
-		<activeProfile>with-zephyrsoft-mirror</activeProfile>
-	</activeProfiles>
+	<mirrors>
+		<mirror>
+			<id>nexus</id>
+			<mirrorOf>*</mirrorOf>
+			<url>https://dev.zephyrsoft.org/nexus/content/groups/public</url>
+		</mirror>
+	</mirrors>
 
 </settings>
