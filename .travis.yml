@@ -11,6 +11,8 @@ branches:
   - master
   - "/^v[0-9].*/"
 
+install: mvn --settings maven-settings.xml install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
 before_script:
 - export TZ=Europe/Berlin
 
