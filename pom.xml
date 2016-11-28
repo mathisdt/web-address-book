@@ -232,6 +232,28 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.5.2</version>
+				<configuration>
+					<file>${basedir}/lib/echopoint-3.0.0b5.jar</file>
+					<sources>${basedir}/lib/echopoint-3.0.0b5-sources.jar</sources>
+					<groupId>echopoint</groupId>
+					<artifactId>echopoint</artifactId>
+					<version>3.0.0b5</version>
+					<packaging>jar</packaging>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<phase>initialize</phase>
+					</execution>
+				</executions>
+			</plugin>
+		
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
 				<version>1.8</version>
@@ -272,7 +294,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<inherited>true</inherited>
+				<version>3.6.0</version>
 				<configuration>
 					<source>${version.java}</source>
 					<target>${version.java}</target>
@@ -282,6 +304,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -299,6 +322,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
+				<version>3.0.0</version>
 				<configuration>
 					<attachClasses>true</attachClasses>
 					<archive>
@@ -360,6 +384,25 @@
 										</versionRange>
 										<goals>
 											<goal>add-third-party</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-install-plugin
+										</artifactId>
+										<versionRange>
+											[2.5.2,)
+										</versionRange>
+										<goals>
+											<goal>install-file</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
