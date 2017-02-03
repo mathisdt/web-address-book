@@ -21,7 +21,7 @@ before_script:
 - export TZ=Europe/Berlin
 - mvn install:install-file -Dfile=lib/echopoint-3.0.0b5.jar -DgroupId=echopoint -DartifactId=echopoint -Dversion=3.0.0b5 -Dpackaging=jar
 
-script: mvn -U clean verify
+script: mvn clean verify
 
 deploy:
   provider: releases
