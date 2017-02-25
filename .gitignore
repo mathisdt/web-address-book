@@ -1,1 +1,3 @@
 /target/
+/.ebean.h2.autofetch
+/logs/

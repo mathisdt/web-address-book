@@ -1,8 +1,6 @@
 package org.zephyrsoft.wab;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
@@ -11,16 +9,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.util.JRLoader;
-import nextapp.echo.filetransfer.app.DownloadProvider;
 
 import org.zephyrsoft.wab.model.Family;
 import org.zephyrsoft.wab.model.Person;
@@ -35,6 +23,16 @@ import com.lowagie.text.pdf.PdfContentByte;
 import com.lowagie.text.pdf.PdfImportedPage;
 import com.lowagie.text.pdf.PdfReader;
 import com.lowagie.text.pdf.PdfWriter;
+
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
+import nextapp.echo.filetransfer.app.DownloadProvider;
 
 /**
  * provider for a downloadable PDF file containing all data from the address book
@@ -151,29 +149,6 @@ public class PdfProvider implements DownloadProvider {
 		}
 		
 		return ret;
-	}
-	
-	/**
-	 * Output the report, use the target file name "/tmp/adressen.pdf".
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		try {
-			// start ebean server and underlying structures
-			ContextListener cl = ContextListener.getInstance();
-			cl.contextInitialized(null);
-			// output report
-			PdfProvider provider = new PdfProvider();
-			FileOutputStream out = new FileOutputStream(new File("/tmp/adressen.pdf"));
-			provider.writeFile(out);
-			out.close();
-			// stop ebean server and underlying structures
-			cl.contextDestroyed(null);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
 	}
 	
 	@Override
