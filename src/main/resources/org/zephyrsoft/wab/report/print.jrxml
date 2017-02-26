@@ -5,9 +5,9 @@
 		 name="print"
 		 columnCount="1"
 		 printOrder="Vertical"
-		 orientation="Landscape"
+		 orientation="Portrait"
 		 pageWidth="595"
-		 pageHeight="421"
+		 pageHeight="842"
 		 columnWidth="555"
 		 columnSpacing="0"
 		 leftMargin="20"
@@ -47,19 +47,108 @@
 			</band>
 		</background>
 		<title>
-			<band height="17"  isSplitAllowed="true" >
-				<subreport  isUsingCache="true">
+			<band height="234"  isSplitAllowed="true" >
+				<staticText>
 					<reportElement
 						x="0"
-						y="0"
+						y="3"
+						width="328"
+						height="30"
+						key="staticText-1"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font size="22" isBold="true" isUnderline="true"/>
+					</textElement>
+				<text><![CDATA[Gemeindeverzeichnis]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="43"
+						width="328"
+						height="43"
+						key="staticText-2"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Christliche Gemeinde Koinonia
+Calvary Chapel Hannover]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="86"
+						width="328"
+						height="71"
+						key="staticText-3"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Herrenstr. 10 - 30159 Hannover - office@koinonia-gemeinde.de
+Tel. Büro: 0511-1614643 - Fax 0511-1614639
+IBAN: DE76 5206 0410 0000 6169 15 / BIC: GENODEF1EK1
+
+Tel. Gemeindecafé - 0511-1319710]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="157"
+						width="328"
+						height="23"
+						key="staticText-4"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+				<text><![CDATA[Kindertagesstätte Löwenkinder]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="180"
+						width="328"
+						height="22"
+						key="staticText-5"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Odeonstr. 6 - 30159 Hannover - 0511-18460 - 0160-1008660]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="0"
+						y="214"
 						width="555"
-						height="14"
-						key="header"
-						positionType="Float"
-						isPrintWhenDetailOverflows="true"/>
-					<parametersMapExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}]]></parametersMapExpression>
-					<subreportExpression  class="net.sf.jasperreports.engine.JasperReport"><![CDATA[$P{HEADER_SUBREPORT_DESIGN}]]></subreportExpression>
-				</subreport>
+						height="18"
+						key="staticText-6"
+						positionType="Float"/>
+					<box></box>
+					<textElement>
+						<font isItalic="true"/>
+					</textElement>
+				<text><![CDATA[Bei Änderungen bitte das Büro benachrichtigen!]]></text>
+				</staticText>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="328"
+						y="4"
+						width="227"
+						height="198"
+						key="image-1"
+						positionType="Float"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.io.InputStream"><![CDATA[$P{REPORT_PARAMETERS_MAP}.get("logo")]]></imageExpression>
+				</image>
 			</band>
 		</title>
 		<pageHeader>
@@ -71,7 +160,7 @@
 			</band>
 		</columnHeader>
 		<detail>
-			<band height="48"  isSplitAllowed="true" >
+			<band height="48"  isSplitAllowed="false" >
 				<line direction="TopDown">
 					<reportElement
 						x="0"
@@ -134,7 +223,7 @@
 					<reportElement
 						x="436"
 						y="5"
-						width="120"
+						width="119"
 						height="14"
 						key="textField"
 						positionType="Float"
@@ -194,7 +283,7 @@
 					<reportElement
 						x="394"
 						y="18"
-						width="162"
+						width="161"
 						height="14"
 						key="textField"
 						positionType="Float"

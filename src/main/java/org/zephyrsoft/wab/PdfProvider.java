@@ -16,14 +16,6 @@ import org.zephyrsoft.wab.report.ReportLoader;
 import org.zephyrsoft.wab.report.SimpleDataSource;
 import org.zephyrsoft.wab.util.DataUtil;
 
-import com.lowagie.text.Document;
-import com.lowagie.text.DocumentException;
-import com.lowagie.text.PageSize;
-import com.lowagie.text.pdf.PdfContentByte;
-import com.lowagie.text.pdf.PdfImportedPage;
-import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfWriter;
-
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -61,7 +53,6 @@ public class PdfProvider implements DownloadProvider {
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put(Constants.LOGO, getClass().getResourceAsStream(Constants.LOGO_IMAGE));
 			parameters.put(Constants.DATE, "Stand: " + printableDate);
-			parameters.put(Constants.HEADER_SUBREPORT, ReportLoader.loadLayout(Constants.HEADER));
 			parameters.put(Constants.PERSON_SUBREPORT, ReportLoader.loadLayout(Constants.PERSON));
 			
 			// the sorting of the families is done inside buildDataSource()
@@ -72,41 +63,12 @@ public class PdfProvider implements DownloadProvider {
 			JRPdfExporter exporter = new JRPdfExporter();
 			
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-			ByteArrayOutputStream outStreamRaw = new ByteArrayOutputStream();
-			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outStreamRaw);
+			outStream = new ByteArrayOutputStream();
+			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outStream);
 			
 			exporter.exportReport();
-			
-			// now merge the A5 pages to A4 pages
-			outStream = new ByteArrayOutputStream();
-			PdfReader reader = new PdfReader(outStreamRaw.toByteArray());
-			Document document = new Document(PageSize.A4, 0, 0, 0, 0);
-			PdfWriter writer = PdfWriter.getInstance(document, outStream);
-			document.open();
-			PdfContentByte cb = writer.getDirectContent();
-			PdfImportedPage page;
-			float offsetY;
-			int total = reader.getNumberOfPages();
-			for (int i = 1; i <= total; i++) {
-				if (Math.abs(i) % 2 == 1) {
-					document.newPage();
-				}
-				offsetY = (Math.abs(i) % 2 == 1 ? PageSize.A4.getHeight() : PageSize.A4.getHeight() / 2);
-				page = writer.getImportedPage(reader, i);
-				// cb.addTemplate(page, 1, 0, 0, 1, 0, offsetY); // portrait mode
-				cb.addTemplate(page, 0, -1, 1, 0, 0, offsetY); // landscape mode
-			}
-			document.close();
-			writer.flush();
-			writer.close();
 		} catch (JRException e) {
 			// JasperReports
-			e.printStackTrace();
-		} catch (DocumentException e) {
-			// iText
-			e.printStackTrace();
-		} catch (IOException e) {
-			// basic I/O
 			e.printStackTrace();
 		}
 	}
