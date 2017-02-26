@@ -1,10 +1,18 @@
 package org.zephyrsoft.wab.model;
 
-import java.io.*;
-import java.sql.*;
-import javax.persistence.*;
-import org.zephyrsoft.wab.*;
-import org.zephyrsoft.wab.util.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+import org.zephyrsoft.wab.Constants;
+import org.zephyrsoft.wab.util.CompareUtil;
 
 /**
  * person data bean (a person is always member of a family)
@@ -17,6 +25,7 @@ public class Person extends ComparableBean<Person> implements Serializable {
 	private static final long serialVersionUID = -3541739218662947140L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Version
 	private Timestamp lastUpdate;
@@ -141,7 +150,7 @@ public class Person extends ComparableBean<Person> implements Serializable {
 			return super.equals(o);
 		}
 	}
-
+	
 	@Override
 	public int hashCode() {
 		// nothing special required, use superclass implementation
