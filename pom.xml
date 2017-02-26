@@ -352,10 +352,6 @@
 						</goals>
 					</execution>
 				</executions>
-				<configuration>
-					<outputDirectory>${project.build.directory}/distribution</outputDirectory>
-					<finalName>${project.artifactId}</finalName>
-				</configuration>
 			</plugin>
 
 			<plugin>
@@ -382,8 +378,6 @@
 	            <artifactId>spring-boot-maven-plugin</artifactId>
 	            <configuration>
 	            	<attach>true</attach>
-	            	<outputDirectory>${project.build.directory}/distribution</outputDirectory>
-					<finalName>${project.artifactId}</finalName>
 	            </configuration>
 	        </plugin>
 		</plugins>
