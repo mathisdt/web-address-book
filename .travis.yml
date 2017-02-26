@@ -19,9 +19,10 @@ install: true
 
 before_script:
 - export TZ=Europe/Berlin
+- export MAVEN_OPTS=-Xmx1024m
 - mvn install:install-file -Dfile=lib/echopoint-3.0.0b5.jar -DgroupId=echopoint -DartifactId=echopoint -Dversion=3.0.0b5 -Dpackaging=jar
 
-script: MAVEN_OPTS=-Xmx1024m mvn clean verify
+script: mvn -X -e clean verify
 
 deploy:
   provider: releases
