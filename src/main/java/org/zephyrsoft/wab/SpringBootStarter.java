@@ -1,10 +1,14 @@
 package org.zephyrsoft.wab;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
+import org.zephyrsoft.wab.model.Family;
+import org.zephyrsoft.wab.model.Person;
 import org.zephyrsoft.wab.util.ApplicationContextProvider;
 
 import com.avaje.ebean.EbeanServer;
@@ -51,6 +55,10 @@ public class SpringBootStarter {
 		ServerConfig config = new ServerConfig();
 		config.setDataSourceConfig(dsConfig);
 		config.setName("default");
+		config.setDefaultServer(true);
+		config.setRegister(true);
+		
+		config.setClasses(Arrays.asList(Family.class, Person.class));
 		
 		config.setDdlGenerate(false);
 		config.setDdlRun(false);
