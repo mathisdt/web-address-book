@@ -7,3 +7,6 @@
 
 ## Technology
 This is an [Echo3](http://echo.nextapp.com/site/echo3/)-based web application. It uses Spring Boot to provide a Tomcat instance.
+
+Startable as Spring Boot application using org.zephyrsoft.wab.SpringBootStarter, optionally with the VM argument
+`-Dspring.profiles.active=dev` if schema should be created and populated with example data.
