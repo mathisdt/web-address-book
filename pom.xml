@@ -38,7 +38,7 @@
 		<version.java>${java.version}</version.java>
 		
 		<!-- dependency versions -->
-		<version.log4j>2.8</version.log4j>
+		<version.log4j>2.9.1</version.log4j>
 		<version.ebean>2.8.1</version.ebean>
 		<version.asm>3.3</version.asm>
 		<version.echo3>3.0.2</version.echo3>
