@@ -52,6 +52,9 @@
 		<version.xstream>1.4.10</version.xstream>
 		<version.validation-api>1.0.0.GA</version.validation-api>
 		<version.hibernate-validator>4.2.0.Final</version.hibernate-validator>
+		<version.commons-beanutils>1.9.3</version.commons-beanutils>
+		<version.commons-collections>3.2.2</version.commons-collections>
+		<version.commons-digester>2.1</version.commons-digester>
 	</properties>
 	
 	<dependencyManagement>
@@ -148,6 +151,7 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
+			<version>${version.commons-beanutils}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -158,10 +162,12 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
+			<version>${version.commons-collections}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-digester</groupId>
 			<artifactId>commons-digester</artifactId>
+			<version>${version.commons-digester}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
