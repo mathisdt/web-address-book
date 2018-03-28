@@ -19,12 +19,6 @@
 		</license>
 	</licenses>
 
-	<scm>
-		<url>https://dev.zephyrsoft.org/svn/web-address-book/trunk/</url>
-		<connection>scm:svn:https://dev.zephyrsoft.org/svn/web-address-book/trunk/</connection>
-		<developerConnection>scm:svn:https://dev.zephyrsoft.org/svn/web-address-book/trunk/</developerConnection>
-	</scm>
-	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -55,6 +49,7 @@
 		<version.commons-beanutils>1.9.3</version.commons-beanutils>
 		<version.commons-collections>3.2.2</version.commons-collections>
 		<version.commons-digester>2.1</version.commons-digester>
+		<version.commons-fileupload>1.3.3</version.commons-fileupload>
 	</properties>
 	
 	<dependencyManagement>
@@ -69,6 +64,11 @@
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
 				<version>${version.hibernate-validator}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${version.commons-fileupload}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -151,7 +151,7 @@
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
-			<version>${version.commons-beanutils}</version>
+			<version>${version.commons-beanutils}</version><!--$NO-MVN-MAN-VER$-->
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
@@ -162,12 +162,12 @@
 		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
-			<version>${version.commons-collections}</version>
+			<version>${version.commons-collections}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			<groupId>commons-digester</groupId>
 			<artifactId>commons-digester</artifactId>
-			<version>${version.commons-digester}</version>
+			<version>${version.commons-digester}</version><!--$NO-MVN-MAN-VER$-->
 			<exclusions>
 				<exclusion>
 					<groupId>commons-logging</groupId>
