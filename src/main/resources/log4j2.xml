@@ -9,6 +9,9 @@
 
 	<Loggers>
 		<Logger name="net.sf.jasperreports" level="warn" />
+		<Logger name="com.zaxxer.hikari" level="warn"/>
+		<Logger name="org.apache.juli" level="warn"/>
+		<Logger name="org.hibernate.validator" level="warn"/>
 		<Logger name="org.springframework" level="info"/>
 	
 		<Root level="debug">

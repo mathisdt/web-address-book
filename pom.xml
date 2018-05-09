@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.12.RELEASE</version>
+		<version>2.0.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -44,8 +44,7 @@
 		<version.jpa>1.0</version.jpa>
 		<version.supercsv>2.4.0</version.supercsv>
 		<version.xstream>1.4.10</version.xstream>
-		<version.validation-api>1.0.0.GA</version.validation-api>
-		<version.hibernate-validator>4.2.0.Final</version.hibernate-validator>
+		<version.hibernate-commons-annotations>5.0.1.Final</version.hibernate-commons-annotations>
 		<version.commons-beanutils>1.9.3</version.commons-beanutils>
 		<version.commons-collections>3.2.2</version.commons-collections>
 		<version.commons-digester>2.1</version.commons-digester>
@@ -55,17 +54,6 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>javax.validation</groupId>
-				<artifactId>validation-api</artifactId>
-				<version>${version.validation-api}</version>
-			</dependency>
-	
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator</artifactId>
-				<version>${version.hibernate-validator}</version>
-			</dependency>
-			<dependency>
 				<groupId>commons-fileupload</groupId>
 				<artifactId>commons-fileupload</artifactId>
 				<version>${version.commons-fileupload}</version>
@@ -74,17 +62,15 @@
 	</dependencyManagement>
 
 	<dependencies>
+		<!-- necessary to supplement hibernate-validator so the following exception won't show up:
+		"NoClassDefFoundError: Could not initialize class org.hibernate.validator.internal.engine.ConfigurationImpl"
+		(the transitive dependency jboss-logging is also necessary) -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.jboss.logging</groupId>
-					<artifactId>jboss-logging</artifactId>
-				</exclusion>
-			</exclusions>
+			<groupId>org.hibernate.common</groupId>
+	        <artifactId>hibernate-commons-annotations</artifactId>
+	        <version>${version.hibernate-commons-annotations}</version>
 		</dependency>
-	
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
