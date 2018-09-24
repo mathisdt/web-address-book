@@ -18,6 +18,12 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	
+	<scm>
+		<url>https://github.com/mathisdt/web-address-book</url>
+		<connection>scm:git:ssh:git@github.com:mathisdt/web-address-book.git</connection>
+		<developerConnection>scm:git:ssh:git@github.com:mathisdt/web-address-book.git</developerConnection>
+	</scm>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
