@@ -20,14 +20,14 @@ import org.zephyrsoft.wab.util.CompareUtil;
 
 /**
  * family data bean
- * 
+ *
  * @author Mathis Dirksen-Thedens
  */
 @Entity
 @Table(name = Constants.ENTITY_FAMILY)
-public class Family extends ComparableBean<Family> implements Serializable {
+public class Family extends ComparableBean<Family> implements HasContacts, Serializable {
 	private static final long serialVersionUID = 4985298161866949004L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -41,111 +41,114 @@ public class Family extends ComparableBean<Family> implements Serializable {
 	private String contact2;
 	private String contact3;
 	private String remarks;
-	
+
 	@OrderBy("ordering, firstName")
 	@OneToMany(targetEntity = Person.class, mappedBy = Constants.ENTITY_FAMILY, cascade = CascadeType.ALL)
 	private List<Person> members = null;
-	
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public Timestamp getLastUpdate() {
 		return lastUpdate;
 	}
-	
+
 	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
-	
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	public String getStreet() {
 		return street;
 	}
-	
+
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	
+
 	public String getPostalCode() {
 		return postalCode;
 	}
-	
+
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-	
+
 	public String getCity() {
 		return city;
 	}
-	
+
 	public void setCity(String city) {
 		this.city = city;
 	}
-	
+
+	@Override
 	public String getContact1() {
 		return contact1;
 	}
-	
+
 	public void setContact1(String contact1) {
 		this.contact1 = contact1;
 	}
-	
+
+	@Override
 	public String getContact2() {
 		return contact2;
 	}
-	
+
 	public void setContact2(String contact2) {
 		this.contact2 = contact2;
 	}
-	
+
+	@Override
 	public String getContact3() {
 		return contact3;
 	}
-	
+
 	public void setContact3(String contact3) {
 		this.contact3 = contact3;
 	}
-	
+
 	public String getRemarks() {
 		return remarks;
 	}
-	
+
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	
+
 	private void initMembers() {
 		members = new ArrayList<>();
 	}
-	
+
 	private void setMemberOrdering() {
 		for (int i = 0; i < members.size(); i++) {
 			Person p = members.get(i);
 			p.setOrdering(i);
 		}
 	}
-	
+
 	public List<Person> getMembers() {
 		return members;
 	}
-	
+
 	public void setMembers(List<Person> members) {
 		this.members = members;
 		setMemberOrdering();
 	}
-	
+
 	public boolean addMember(Person e) {
 		if (members == null) {
 			initMembers();
@@ -154,25 +157,25 @@ public class Family extends ComparableBean<Family> implements Serializable {
 		setMemberOrdering();
 		return returnValue;
 	}
-	
+
 	public void clearMembers() {
 		if (members == null) {
 			return;
 		} else {
-			for (Person p : this.members) {
+			for (HasContacts p : this.members) {
 				removeMember(p);
 			}
 		}
 	}
-	
-	public boolean containsMember(Person o) {
+
+	public boolean containsMember(HasContacts o) {
 		if (members == null) {
 			return false;
 		}
 		return members.contains(o);
 	}
-	
-	public Person newMember() {
+
+	public HasContacts newMember() {
 		if (members == null) {
 			initMembers();
 		}
@@ -180,8 +183,8 @@ public class Family extends ComparableBean<Family> implements Serializable {
 		addMember(p);
 		return p;
 	}
-	
-	public boolean removeMember(Person o) {
+
+	public boolean removeMember(HasContacts o) {
 		if (members == null) {
 			return false;
 		}
@@ -189,32 +192,32 @@ public class Family extends ComparableBean<Family> implements Serializable {
 		setMemberOrdering();
 		return returnValue;
 	}
-	
+
 	public boolean isEmpty() {
 		if (members == null) {
 			return true;
 		}
 		return members.isEmpty();
 	}
-	
+
 	public int size() {
 		if (members == null) {
 			return 0;
 		}
 		return members.size();
 	}
-	
-	public boolean mayMoveUp(Person p) {
+
+	public boolean mayMoveUp(HasContacts p) {
 		// person is in list, but not at first position
 		return containsMember(p) && members != null && members.indexOf(p) > 0;
 	}
-	
-	public boolean mayMoveDown(Person p) {
+
+	public boolean mayMoveDown(HasContacts p) {
 		// person is in list, but not at last position
 		return containsMember(p) && members != null && members.lastIndexOf(p) < members.size() - 1;
 	}
-	
-	public Person moveUp(Person p) {
+
+	public HasContacts moveUp(Person p) {
 		if (mayMoveUp(p)) {
 			int sourceIndex = members.indexOf(p);
 			int targetIndex = sourceIndex - 1;
@@ -228,8 +231,8 @@ public class Family extends ComparableBean<Family> implements Serializable {
 			return null;
 		}
 	}
-	
-	public Person moveDown(Person p) {
+
+	public HasContacts moveDown(Person p) {
 		if (mayMoveDown(p)) {
 			int sourceIndex = members.lastIndexOf(p);
 			int targetIndex = sourceIndex + 1;
@@ -243,7 +246,7 @@ public class Family extends ComparableBean<Family> implements Serializable {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Compare this family to another. This is done by comparing the last names
 	 * and then the street and then the contact fields (null values are always last).
@@ -273,7 +276,7 @@ public class Family extends ComparableBean<Family> implements Serializable {
 		}
 		return returnValue;
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Family) {
@@ -282,11 +285,11 @@ public class Family extends ComparableBean<Family> implements Serializable {
 			return super.equals(o);
 		}
 	}
-	
+
 	@Override
 	public int hashCode() {
 		// nothing special required, use superclass implementation
 		return super.hashCode();
 	}
-	
+
 }

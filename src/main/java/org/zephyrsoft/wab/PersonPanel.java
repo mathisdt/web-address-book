@@ -142,7 +142,7 @@ public class PersonPanel extends Panel {
 				try {
 					// delete person from database
 					DataUtil.beginTransaction();
-					Person switchedWith = getPerson().getFamily().moveUp(getPerson());
+					HasContacts switchedWith = getPerson().getFamily().moveUp(getPerson());
 					DataUtil.save(switchedWith);
 					DataUtil.save(getPerson());
 					DataUtil.commitTransaction();
@@ -160,7 +160,7 @@ public class PersonPanel extends Panel {
 				try {
 					// delete person from database
 					DataUtil.beginTransaction();
-					Person switchedWith = getPerson().getFamily().moveDown(getPerson());
+					HasContacts switchedWith = getPerson().getFamily().moveDown(getPerson());
 					DataUtil.save(switchedWith);
 					DataUtil.save(getPerson());
 					DataUtil.commitTransaction();
