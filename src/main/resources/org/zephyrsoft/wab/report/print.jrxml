@@ -47,7 +47,7 @@
 			</band>
 		</background>
 		<title>
-			<band height="234"  isSplitAllowed="true" >
+			<band height="291"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
 						x="0"
@@ -90,7 +90,7 @@ Calvary Chapel Hannover]]></text>
 						<font/>
 					</textElement>
 				<text><![CDATA[Herrenstr. 10 - 30159 Hannover - office@koinonia-gemeinde.de
-Tel. Büro: 0511-1614643 - Fax 0511-1614639
+Tel. Büro: 0511-1614643
 IBAN: DE76 5206 0410 0000 6169 15 / BIC: GENODEF1EK1
 
 Tel. Gemeindecafé - 0511-1319710]]></text>
@@ -128,14 +128,17 @@ Tel. Gemeindecafé - 0511-1319710]]></text>
 						x="0"
 						y="214"
 						width="555"
-						height="18"
+						height="77"
 						key="staticText-6"
 						positionType="Float"/>
 					<box></box>
 					<textElement>
 						<font isItalic="true"/>
 					</textElement>
-				<text><![CDATA[Bei Änderungen bitte das Büro benachrichtigen!]]></text>
+				<text><![CDATA[Bei Änderungen bitte das Büro benachrichtigen!
+
+Diese Liste ist nur für den persönlichen Gebrauch gedacht, die enthaltenen Daten dürfen nicht ohne Einwilligung der betroffenen Personen weitergegeben werden.
+Wenn Dich jemand um Kontaktdaten aus dieser Liste bittet, gib stattdessen die Kontaktdaten der anfragenden Person mit der Bitte um Kontaktaufnahme an die betroffene Person weiter!]]></text>
 				</staticText>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
