@@ -352,7 +352,7 @@
 			<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.4.1</version><!--$NO-MVN-MAN-VER$-->
+                <version>3.0.0-M2</version><!--$NO-MVN-MAN-VER$-->
                 <executions>
                     <execution>
                         <id>enforce-banned-dependencies</id>
@@ -361,6 +361,7 @@
                         </goals>
                         <configuration>
                             <rules>
+                                <requireMavenVersion><version>3.2.0</version></requireMavenVersion>
                                 <bannedDependencies>
                                   <excludes>
                                     <exclude>log4j:log4j</exclude>
@@ -382,7 +383,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>license-maven-plugin</artifactId>
-				<version>1.8</version>
+				<version>1.20</version>
 				<configuration>
 					<useMissingFile>true</useMissingFile>
 					<useRepositoryMissingFiles>false</useRepositoryMissingFiles>
@@ -420,7 +421,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.0</version><!--$NO-MVN-MAN-VER$-->
+				<version>3.8.1</version><!--$NO-MVN-MAN-VER$-->
 				<configuration>
 					<source>${version.java}</source>
 					<target>${version.java}</target>
@@ -430,7 +431,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version><!--$NO-MVN-MAN-VER$-->
+				<version>3.1.0</version><!--$NO-MVN-MAN-VER$-->
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -444,7 +445,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.0</version><!--$NO-MVN-MAN-VER$-->
+				<version>3.1.2</version><!--$NO-MVN-MAN-VER$-->
 				<configuration>
 					<archive>
 						<manifest>
