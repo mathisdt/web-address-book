@@ -21,7 +21,7 @@ before_script:
 - export TZ=Europe/Berlin
 - echo "MAVEN_OPTS=-Xmx2g" >~/.mavenrc
 
-script: mvn clean verify
+script: mvn -U clean verify
 
 deploy:
   provider: releases
