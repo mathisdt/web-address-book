@@ -47,7 +47,7 @@
 		<version.echo3-extras>3.0.3</version.echo3-extras>
 		<version.echopoint>3.0.0b5</version.echopoint>
 		<version.itext>2.1.7</version.itext>
-		<version.jasperreports>3.7.4</version.jasperreports>
+		<version.jasperreports>6.13.0</version.jasperreports>
 		<version.jta>1.1</version.jta>
 		<version.jpa>1.0</version.jpa>
 		<version.supercsv>2.4.0</version.supercsv>
