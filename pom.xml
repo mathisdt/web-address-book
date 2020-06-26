@@ -52,7 +52,7 @@
 		<version.jpa>1.0.2</version.jpa>
 		<version.supercsv>2.4.0</version.supercsv>
 		<version.xstream>1.4.11</version.xstream>
-		<version.hibernate-commons-annotations>5.0.1.Final</version.hibernate-commons-annotations>
+		<version.hibernate-commons-annotations>5.1.0.Final</version.hibernate-commons-annotations>
 		<version.commons-beanutils>1.9.4</version.commons-beanutils>
 		<version.commons-collections>3.2.2</version.commons-collections>
 		<version.commons-digester>2.1</version.commons-digester>
