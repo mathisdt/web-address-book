@@ -5,6 +5,8 @@ updates:
     schedule:
       interval: "monthly"
     ignore:
+      - dependency-name: "net.sf.jasperreports:jasperreports"
+      - dependency-name: "com.lowagie:itext"
       # there was a problem introduced in 2.11.1, so don't update log4j
       - dependency-name: "org.apache.logging.log4j:log4j*"
     allow:
