@@ -42,7 +42,7 @@
 		<version.mysql-client>[8.0.16,)</version.mysql-client>
 		<version.log4j>2.10.0</version.log4j>
 		<version.ebean>2.8.1</version.ebean>
-		<version.asm>3.3</version.asm>
+		<version.asm>3.3.1</version.asm>
 		<version.echo3>3.1.0</version.echo3>
 		<version.echo3-extras>3.0.3</version.echo3-extras>
 		<version.echopoint>3.0.0b5</version.echopoint>
