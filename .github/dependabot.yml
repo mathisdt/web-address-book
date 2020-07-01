@@ -8,7 +8,7 @@ updates:
       - dependency-name: "net.sf.jasperreports:jasperreports"
       - dependency-name: "com.lowagie:itext"
       - dependency-name: "com.thoughtworks.xstream:xstream"
-        versions: ["*-java7"]
+        versions: ["1.4.12-java7"]
       # there was a problem introduced in 2.11.1, so don't update log4j
       - dependency-name: "org.apache.logging.log4j:log4j*"
     allow:
