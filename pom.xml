@@ -40,7 +40,6 @@
 		<!-- dependency versions -->
 		<version.h2>1.4.200</version.h2>
 		<version.mysql-client>[8.0.16,)</version.mysql-client>
-		<version.log4j>2.10.0</version.log4j>
 		<version.ebean>2.8.1</version.ebean>
 		<version.asm>3.3.1</version.asm>
 		<version.echo3>3.1.0</version.echo3>
@@ -95,10 +94,6 @@
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-starter-logging</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-log4j</artifactId>
 				</exclusion>
 				<exclusion>
@@ -125,35 +120,6 @@
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-jdbc</artifactId>
-		    <exclusions>
-		    	<exclusion>
-		    		<groupId>ch.qos.logback</groupId>
-		    		<artifactId>logback-classic</artifactId>
-		    	</exclusion>
-		    </exclusions>
-		</dependency>
-
-		<!-- logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>jul-to-slf4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
 		</dependency>
 
 		<dependency>
@@ -369,10 +335,9 @@
                                 <bannedDependencies>
                                   <excludes>
                                     <exclude>log4j:log4j</exclude>
+                                    <exclude>org.apache.logging.log4j:log4j-core</exclude>
                                     <exclude>org.slf4j:slf4j-log4j12</exclude>
                                     <exclude>org.slf4j:slf4j-jdk14</exclude>
-                                    <exclude>ch.qos.logback:logback-core</exclude>
-                                    <exclude>ch.qos.logback:logback-classic</exclude>
                                     <exclude>ch.qos.logback:logback-access</exclude>
                                     <exclude>commons-logging:commons-logging</exclude>
                                   </excludes>
