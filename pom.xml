@@ -56,6 +56,7 @@
 		<version.commons-collections>3.2.2</version.commons-collections>
 		<version.commons-digester>2.1</version.commons-digester>
 		<version.commons-fileupload>1.4</version.commons-fileupload>
+		<version.junit>4.13.1</version.junit>
 	</properties>
 
 	<dependencyManagement>
@@ -71,10 +72,15 @@
 			    <version>${version.h2}</version>
 			</dependency>
 			<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${version.mysql-client}</version>
-		</dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${version.mysql-client}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${version.junit}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
