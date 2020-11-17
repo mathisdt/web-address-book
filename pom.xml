@@ -50,7 +50,7 @@
 		<version.jta>1.1</version.jta>
 		<version.jpa>1.0.2</version.jpa>
 		<version.supercsv>2.4.0</version.supercsv>
-		<version.xstream>1.4.12</version.xstream>
+		<version.xstream>1.4.14</version.xstream>
 		<version.hibernate-commons-annotations>5.1.0.Final</version.hibernate-commons-annotations>
 		<version.commons-beanutils>1.9.4</version.commons-beanutils>
 		<version.commons-collections>3.2.2</version.commons-collections>
