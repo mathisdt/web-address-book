@@ -144,7 +144,7 @@ public class Screen extends ContentPane {
 		return emailAddresses;
 	}
 	private static void addIfEmail(String contact, List<String> emailAddresses) {
-		if (!StringUtils.isEmpty(contact) && emailPattern.matcher(contact.trim()).matches()) {
+		if (StringUtils.hasLength(contact) && emailPattern.matcher(contact.trim()).matches()) {
 			emailAddresses.add(contact.trim());
 		}
 	}
