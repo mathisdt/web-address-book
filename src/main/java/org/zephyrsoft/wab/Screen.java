@@ -1,7 +1,7 @@
 package org.zephyrsoft.wab;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -77,7 +77,7 @@ public class Screen extends ContentPane {
 		});
 		String mailAddresses = families.stream()
 			.flatMap(f -> {
-				List<String> addresses = new LinkedList<>();
+				List<String> addresses = new ArrayList<>();
 				extractEmailAddresses(f, addresses);
 				return addresses.stream();
 			})
