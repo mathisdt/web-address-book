@@ -28,54 +28,52 @@ import nextapp.echo.filetransfer.app.DownloadProvider;
 
 /**
  * provider for a downloadable PDF file containing all data from the address book
- * 
- * @author Mathis Dirksen-Thedens
  */
 public class PdfProvider implements DownloadProvider {
-	
+
 	private String fileName = Constants.EMPTY_STRING;
 	private String printableDate = Constants.EMPTY_STRING;
 	private ByteArrayOutputStream outStream = null;
-	
+
 	public PdfProvider() {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd-HH-mm");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("dd.MM.yyyy");
 		Date date = new Date();
 		fileName = "Gemeindeverzeichnis-" + sdf1.format(date) + ".pdf";
 		printableDate = sdf2.format(date);
-		
+
 		// load all families and build the pdf
 		try {
 			JasperReport jasperReport = (JasperReport) JRLoader.loadObject(getClass().getResourceAsStream(
 				Constants.REPORT_TEMPLATE));
-			
+
 			// add parameters "logo" and "date"
 			Map<String, Object> parameters = new HashMap<>();
 			parameters.put(Constants.LOGO, getClass().getResourceAsStream(Constants.LOGO_IMAGE));
 			parameters.put(Constants.DATE, "Stand: " + printableDate);
 			parameters.put(Constants.PERSON_SUBREPORT, ReportLoader.loadLayout(Constants.PERSON));
-			
+
 			// the sorting of the families is done inside buildDataSource()
 			JRDataSource dataSource = buildDataSource();
-			
+
 			JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-			
+
 			JRPdfExporter exporter = new JRPdfExporter();
-			
+
 			exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
 			outStream = new ByteArrayOutputStream();
 			exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outStream);
-			
+
 			exporter.exportReport();
 		} catch (JRException e) {
 			// JasperReports
 			e.printStackTrace();
 		}
 	}
-	
+
 	private JRDataSource buildDataSource() {
 		SimpleDataSource ret = new SimpleDataSource();
-		
+
 		List<Family> families = DataUtil.find(Family.class).findList();
 		Collections.sort(families);
 		for (Family f : families) {
@@ -109,20 +107,20 @@ public class PdfProvider implements DownloadProvider {
 			}
 			ret.put(members);
 		}
-		
+
 		return ret;
 	}
-	
+
 	@Override
 	public String getContentType() {
 		return Constants.APPLICATION_PDF;
 	}
-	
+
 	@Override
 	public String getFileName() {
 		return fileName;
 	}
-	
+
 	@Override
 	public long getSize() {
 		if (outStream == null) {
@@ -131,10 +129,10 @@ public class PdfProvider implements DownloadProvider {
 			return outStream.size();
 		}
 	}
-	
+
 	@Override
 	public void writeFile(OutputStream out) throws IOException {
 		out.write(outStream.toByteArray());
 	}
-	
+
 }

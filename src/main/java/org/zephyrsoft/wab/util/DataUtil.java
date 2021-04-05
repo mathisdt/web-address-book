@@ -19,13 +19,11 @@ import nextapp.echo.app.event.ActionListener;
 
 /**
  * utility for data access
- * 
- * @author Mathis Dirksen-Thedens
  */
 public class DataUtil {
-	
+
 	private static EbeanServer ebeanServerInstance;
-	
+
 	private static EbeanServer getEbeanServerInstance() {
 		if (ebeanServerInstance == null) {
 			// fetch the one and only instance from the Spring context
@@ -33,64 +31,64 @@ public class DataUtil {
 		}
 		return ebeanServerInstance;
 	}
-	
+
 	public static Transaction beginTransaction() {
 		Transaction t = getEbeanServerInstance().beginTransaction();
 		t.setPersistCascade(true);
 		return t;
 	}
-	
+
 	public static void commitTransaction() {
 		getEbeanServerInstance().commitTransaction();
 	}
-	
+
 	public static <T> Query<T> createQuery(Class<T> beanType) {
 		return getEbeanServerInstance().createQuery(beanType);
 	}
-	
+
 	public static void delete(Object bean) throws OptimisticLockException {
 		getEbeanServerInstance().delete(bean);
 	}
-	
+
 	public static void endTransaction() {
 		getEbeanServerInstance().endTransaction();
 	}
-	
+
 	public static <T> Query<T> find(Class<T> beanType) {
 		return getEbeanServerInstance().find(beanType);
 	}
-	
+
 	public static <T> T find(Class<T> beanType, Integer id) {
 		return getEbeanServerInstance().find(beanType, id);
 	}
-	
+
 	public static Object nextId(Class<?> beanType) {
 		return getEbeanServerInstance().nextId(beanType);
 	}
-	
+
 	public static void rollbackTransaction() {
 		getEbeanServerInstance().rollbackTransaction();
 	}
-	
+
 	public static void save(Object bean) throws OptimisticLockException {
 		getEbeanServerInstance().save(bean);
 	}
-	
+
 	public static void update(Object bean) {
 		getEbeanServerInstance().update(bean);
 	}
-	
+
 	public static void refresh(Object bean) {
 		getEbeanServerInstance().refresh(bean);
 	}
-	
+
 	public static void refreshMany(Object bean, String propertyName) {
 		getEbeanServerInstance().refreshMany(bean, propertyName);
 	}
-	
+
 	/**
 	 * bind an Echo3 textfield to a String property of a data model
-	 * 
+	 *
 	 * @param textfield
 	 *            view
 	 * @param instance
@@ -102,10 +100,10 @@ public class DataUtil {
 		// create an event listener managing both directions of change
 		new TextfieldBinding(textfield, instance, property);
 	}
-	
+
 	private static class TextfieldBinding implements PropertyChangeListener, ActionListener {
 		private static final long serialVersionUID = 2299534198052432679L;
-		
+
 		private TextField textfield = null;
 		private Object instance = null;
 		@SuppressWarnings("unused")
@@ -114,7 +112,7 @@ public class DataUtil {
 		private transient Method setter = null;
 		private PropertyChangeSupport beanPropertyChangeSupport = null;
 		private boolean changeInProgress = false;
-		
+
 		public TextfieldBinding(TextField textfield, Object instance, String property) {
 			this.textfield = textfield;
 			this.instance = instance;
@@ -130,7 +128,7 @@ public class DataUtil {
 			beanPropertyChangeSupport = new PropertyChangeSupport(instance);
 			beanPropertyChangeSupport.addPropertyChangeListener(property, this);
 		}
-		
+
 		@Override
 		public void propertyChange(PropertyChangeEvent evt) {
 			synchronized (this) {
@@ -142,7 +140,7 @@ public class DataUtil {
 				}
 			}
 		}
-		
+
 		@Override
 		public void actionPerformed(ActionEvent ev) {
 			synchronized (this) {
@@ -172,14 +170,14 @@ public class DataUtil {
 			}
 		}
 	}
-	
+
 	private static String getGetterName(String property) {
 		if (property == null || property.length() == 0) {
 			throw new IllegalArgumentException(Constants.PROPERTY_NAME_LENGTH_PROBLEM);
 		}
 		return Constants.GET + property.substring(0, 1).toUpperCase() + property.substring(1);
 	}
-	
+
 	private static String getSetterName(String property) {
 		if (property == null || property.length() == 0) {
 			throw new IllegalArgumentException(Constants.PROPERTY_NAME_LENGTH_PROBLEM);

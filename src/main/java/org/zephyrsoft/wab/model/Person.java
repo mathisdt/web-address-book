@@ -16,8 +16,6 @@ import org.zephyrsoft.wab.util.CompareUtil;
 
 /**
  * person data bean (a person is always member of a family)
- *
- * @author Mathis Dirksen-Thedens
  */
 @Entity
 @Table(name = Constants.ENTITY_PERSON)

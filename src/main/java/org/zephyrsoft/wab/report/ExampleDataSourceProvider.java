@@ -10,8 +10,6 @@ import org.zephyrsoft.wab.Constants;
 
 /**
  * DataSourceProvider for designing the reports with iReport
- * 
- * @author Mathis Dirksen-Thedens
  */
 public class ExampleDataSourceProvider implements JRDataSourceProvider {
 

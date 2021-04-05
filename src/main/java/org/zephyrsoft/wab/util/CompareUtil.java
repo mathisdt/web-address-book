@@ -2,11 +2,9 @@ package org.zephyrsoft.wab.util;
 
 /**
  * utility for routine comparison tasks
- * 
- * @author Mathis Dirksen-Thedens
  */
 public class CompareUtil {
-	
+
 	public static <T extends Comparable<T>> int compareWithNullsLast(T o1, T o2) {
 		if (o1==null && o2==null) {
 			return 0;
@@ -20,5 +18,5 @@ public class CompareUtil {
 			throw new IllegalArgumentException();
 		}
 	}
-	
+
 }

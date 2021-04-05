@@ -8,21 +8,19 @@ import nextapp.echo.app.event.*;
 
 /**
  * container for the UI elements of a person (as member of a family)
- * 
- * @author Mathis Dirksen-Thedens
  */
 public class PersonPanel extends Panel {
 
 	private static final long serialVersionUID = -5291254570310018206L;
-	
+
 	private Person person = null;
-	
+
 	private Row titleRow = null;
-	
+
 	private Button deletePerson = null;
 	private Button moveUp = null;
 	private Button moveDown = null;
-	
+
 	private TextField firstName = null;
 	private TextField lastName = null;
 	private TextField birthday = null;
@@ -34,19 +32,19 @@ public class PersonPanel extends Panel {
 	private final FamilyPanel parent;
 
 	private final EchoElementStore elements;
-	
+
 	public PersonPanel(FamilyPanel parent, EchoElementStore elements, Person person) {
 		super();
 		this.parent = parent;
 		this.elements = elements;
 		this.person = person;
-		
+
 		if (this.person==null) {
 			this.person = new Person();
 		}
 		initView();
 	}
-	
+
 	private void initView() {
 		// create instances
 		titleRow = new Row();
@@ -62,7 +60,7 @@ public class PersonPanel extends Panel {
 		contact2 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		contact3 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		remarks = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
-		
+
 		// set start values
 		firstName.setText(person.getFirstName());
 		lastName.setText(person.getLastName());
@@ -71,12 +69,12 @@ public class PersonPanel extends Panel {
 		contact2.setText(person.getContact2());
 		contact3.setText(person.getContact3());
 		remarks.setText(person.getRemarks());
-		
+
 		// top level container
 		Column topColumn = new Column();
         topColumn.setCellSpacing(new Extent(10));
         add(topColumn);
-        
+
         // title row
         firstName.setToolTipText("first name");
         lastName.setToolTipText("last name" + " (if different from family name)");
@@ -85,13 +83,13 @@ public class PersonPanel extends Panel {
 		contact2.setToolTipText("phone/mobile/email 2");
 		contact3.setToolTipText("phone/mobile/email 3");
 		remarks.setToolTipText("remarks");
-		
+
 		Column moveButtons = new Column();
 		moveButtons.setCellSpacing(new Extent(0));
 		moveButtons.add(moveUp);
         moveButtons.add(moveDown);
         titleRow.add(moveButtons);
-		
+
         titleRow.add(EchoUtil.createSmallLabel(firstName, "first name"));
         titleRow.add(EchoUtil.createSmallLabel(lastName, "last name"));
         titleRow.add(EchoUtil.createSmallLabel(birthday, "birthday"));
@@ -101,7 +99,7 @@ public class PersonPanel extends Panel {
         titleRow.add(EchoUtil.createSmallLabel(remarks, "remarks"));
         titleRow.add(deletePerson);
         topColumn.add(titleRow);
-        
+
         // bind view to model
         DataUtil.bindTextfield(firstName, person, Constants.ATTRIBUTE_FIRST_NAME);
         DataUtil.bindTextfield(lastName, person, Constants.ATTRIBUTE_LAST_NAME);
@@ -110,9 +108,9 @@ public class PersonPanel extends Panel {
         DataUtil.bindTextfield(contact2, person, Constants.ATTRIBUTE_CONTACT2);
         DataUtil.bindTextfield(contact3, person, Constants.ATTRIBUTE_CONTACT3);
         DataUtil.bindTextfield(remarks, person, Constants.ATTRIBUTE_REMARKS);
-        
+
 		checkButtonActivation();
-        
+
         // Actions
         deletePerson.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = -4798229206323253003L;
@@ -184,7 +182,7 @@ public class PersonPanel extends Panel {
 		moveUp.setIcon(mayMoveUp ? EchoUtil.createImage(Constants.BUTTON_UP_GREEN) : EchoUtil.createImage(Constants.BUTTON_UP_GREY));
 		moveDown.setIcon(mayMoveDown ? EchoUtil.createImage(Constants.BUTTON_DOWN_GREEN) : EchoUtil.createImage(Constants.BUTTON_DOWN_GREY));
 	}
-	
+
 	public final Person getPerson() {
 		return person;
 	}

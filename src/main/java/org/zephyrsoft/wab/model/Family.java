@@ -20,8 +20,6 @@ import org.zephyrsoft.wab.util.CompareUtil;
 
 /**
  * family data bean
- *
- * @author Mathis Dirksen-Thedens
  */
 @Entity
 @Table(name = Constants.ENTITY_FAMILY)

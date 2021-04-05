@@ -29,22 +29,20 @@ import echopoint.KeystrokeTextField;
 
 /**
  * container for the UI elements of a family (including any member's UI elements as sub-panels)
- * 
- * @author Mathis Dirksen-Thedens
  */
 public class FamilyPanel extends Panel {
-	
+
 	private static final long serialVersionUID = -7732074007710939064L;
-	
+
 	private Family family = null;
-	
+
 	private Row titleRow = null; // title row with family data and "delete family" button
 	private Column detailColumn = null; // contains the personsColumn (see below) and the "add member" button
 	private Column personsColumn = null; // contains all person panels that exist
-	
+
 	private Button deleteFamily = null;
 	private Button addPerson = null;
-	
+
 	private TextField lastName = null;
 	private TextField street = null;
 	private TextField postalCode = null;
@@ -53,21 +51,21 @@ public class FamilyPanel extends Panel {
 	private TextField contact2 = null;
 	private TextField contact3 = null;
 	private TextField remarks = null;
-	
+
 	private final EchoElementStore elements;
-	
+
 	public FamilyPanel(Family family, EchoElementStore elements) {
 		super();
-		
+
 		this.family = family;
 		this.elements = elements;
-		
+
 		if (this.family == null) {
 			this.family = new Family();
 		}
 		initView();
 	}
-	
+
 	private final void initView() {
 		// create instances
 		titleRow = new Row();
@@ -85,7 +83,7 @@ public class FamilyPanel extends Panel {
 		contact2 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		contact3 = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
 		remarks = new KeystrokeTextField(Constants.KEYSTROKE_SEND_INTERVAL);
-		
+
 		// set start values
 		lastName.setText(family.getLastName());
 		street.setText(family.getStreet());
@@ -95,7 +93,7 @@ public class FamilyPanel extends Panel {
 		contact2.setText(family.getContact2());
 		contact3.setText(family.getContact3());
 		remarks.setText(family.getRemarks());
-		
+
 		// borders
 		Side[] border = new Side[] { new Side(new Extent(10), Color.YELLOW, Border.STYLE_SOLID),
 			new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE),
@@ -103,12 +101,12 @@ public class FamilyPanel extends Panel {
 			new Side(new Extent(0), Color.BLACK, Border.STYLE_NONE) };
 		setBorder(new Border(border));
 		setInsets(new Insets(new Extent(0), new Extent(0), new Extent(0), new Extent(10)));
-		
+
 		// top level container
 		Column topColumn = new Column();
 		topColumn.setCellSpacing(new Extent(10));
 		add(topColumn);
-		
+
 		// title row
 		lastName.setToolTipText("last name");
 		street.setToolTipText("street");
@@ -128,14 +126,14 @@ public class FamilyPanel extends Panel {
 		titleRow.add(EchoUtil.createSmallLabel(remarks, "remarks"));
 		titleRow.add(deleteFamily);
 		topColumn.add(titleRow);
-		
+
 		// fill persons column
 		if (family.getMembers() != null) {
 			for (Person p : family.getMembers()) {
 				personsColumn.add(new PersonPanel(FamilyPanel.this, elements, p));
 			}
 		}
-		
+
 		// build details area
 		detailColumn.setInsets(new Insets(40, 0, 0, 0));
 		detailColumn.add(personsColumn);
@@ -143,7 +141,7 @@ public class FamilyPanel extends Panel {
 		addPersonRow.add(addPerson);
 		detailColumn.add(addPersonRow);
 		topColumn.add(detailColumn);
-		
+
 		// bind view to model
 		DataUtil.bindTextfield(lastName, family, Constants.ATTRIBUTE_LAST_NAME);
 		DataUtil.bindTextfield(street, family, Constants.ATTRIBUTE_STREET);
@@ -153,11 +151,11 @@ public class FamilyPanel extends Panel {
 		DataUtil.bindTextfield(contact2, family, Constants.ATTRIBUTE_CONTACT2);
 		DataUtil.bindTextfield(contact3, family, Constants.ATTRIBUTE_CONTACT3);
 		DataUtil.bindTextfield(remarks, family, Constants.ATTRIBUTE_REMARKS);
-		
+
 		// Actions
 		addPerson.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = -4798229206323253003L;
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -180,7 +178,7 @@ public class FamilyPanel extends Panel {
 		});
 		deleteFamily.addActionListener(new ActionListener() {
 			private static final long serialVersionUID = -4798229206323253001L;
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -201,7 +199,7 @@ public class FamilyPanel extends Panel {
 			}
 		});
 	}
-	
+
 	public void reorderPersonPanels() {
 		Component[] compononts = personsColumn.getComponents();
 		Map<Person, PersonPanel> person2personPanel = new TreeMap<>();
@@ -219,11 +217,11 @@ public class FamilyPanel extends Panel {
 			pp.checkButtonActivation();
 		}
 	}
-	
+
 	public final Family getFamily() {
 		return family;
 	}
-	
+
 	public void reloadFamilyMembers() {
 		try {
 			DataUtil.refreshMany(getFamily(), Constants.ATTRIBUTE_MEMBERS);
@@ -231,7 +229,7 @@ public class FamilyPanel extends Panel {
 			ex.printStackTrace();
 		}
 	}
-	
+
 	public void removePersonPanel(PersonPanel personPanel) {
 		personsColumn.remove(personPanel);
 	}

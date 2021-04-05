@@ -33,8 +33,6 @@ import nextapp.echo.filetransfer.app.DownloadProvider;
 
 /**
  * container for the whole application's UI
- *
- * @author Mathis Dirksen-Thedens
  */
 public class Screen extends ContentPane {
 

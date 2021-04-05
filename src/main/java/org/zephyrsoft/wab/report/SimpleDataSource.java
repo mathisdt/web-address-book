@@ -12,46 +12,44 @@ import net.sf.jasperreports.engine.JRRewindableDataSource;
 
 /**
  * simple data source which holds all data in maps with strings as keys
- * 
- * @author Mathis Dirksen-Thedens
  */
 public final class SimpleDataSource implements JRRewindableDataSource {
-	
+
 	private List<Map<String, Object>> data;
 	private Iterator<Map<String, Object>> iterator;
 	private String keyName;
 	private Map<String, Object> currentReadEntry;
 	private Map<String, Object> currentWriteEntry;
-	
+
 	public SimpleDataSource() {
 		this(null);
 	}
-	
+
 	public SimpleDataSource(String keyName) {
 		this.data = new ArrayList<>();
 		this.keyName = keyName;
 	}
-	
+
 	public int getRecordCount() {
 		return data.size();
 	}
-	
+
 	public void beginNewRow() {
 		currentWriteEntry = new HashMap<>();
 		data.add(currentWriteEntry);
 	}
-	
+
 	public Map<String, Object> getCurrentReadEntry() {
 		return currentReadEntry;
 	}
-	
+
 	public void put(String key, Object value) {
 		if (currentWriteEntry == null) {
 			beginNewRow();
 		}
 		currentWriteEntry.put(key, value);
 	}
-	
+
 	public void put(SimpleDataSource subDataSource) {
 		if (subDataSource != null) {
 			String subDataSourceKeyName = subDataSource.getKeyName();
@@ -64,14 +62,14 @@ public final class SimpleDataSource implements JRRewindableDataSource {
 			throw new IllegalArgumentException("subDataSource was null");
 		}
 	}
-	
+
 	@Override
 	public Object getFieldValue(JRField jrField) throws JRException {
 		Object obj = currentReadEntry.get(jrField.getName());
 		// fail fast: provoke ClassCastException if object cannot be cast to target class
 		return jrField.getValueClass().cast(obj);
 	}
-	
+
 	@Override
 	public boolean next() throws JRException {
 		if (iterator == null)
@@ -82,19 +80,19 @@ public final class SimpleDataSource implements JRRewindableDataSource {
 		}
 		return ret;
 	}
-	
+
 	@Override
 	public void moveFirst() {
 		iterator = null;
 		currentReadEntry = null;
 	}
-	
+
 	public void setKeyName(String keyName) {
 		this.keyName = keyName;
 	}
-	
+
 	public String getKeyName() {
 		return keyName;
 	}
-	
+
 }
