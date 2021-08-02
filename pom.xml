@@ -55,7 +55,7 @@
 		<version.commons-collections>3.2.2</version.commons-collections>
 		<version.commons-digester>2.1</version.commons-digester>
 		<version.commons-fileupload>1.4</version.commons-fileupload>
-		<version.commons-io>2.10.0</version.commons-io>
+		<version.commons-io>2.11.0</version.commons-io>
 		<version.junit>4.13.2</version.junit>
 	</properties>
 
