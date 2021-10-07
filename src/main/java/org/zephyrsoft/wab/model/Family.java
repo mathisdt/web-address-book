@@ -48,7 +48,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
@@ -56,7 +56,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return lastUpdate;
 	}
 
-	public void setLastUpdate(Timestamp lastUpdate) {
+	public void setLastUpdate(final Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
@@ -64,7 +64,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -72,7 +72,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return street;
 	}
 
-	public void setStreet(String street) {
+	public void setStreet(final String street) {
 		this.street = street;
 	}
 
@@ -80,7 +80,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return postalCode;
 	}
 
-	public void setPostalCode(String postalCode) {
+	public void setPostalCode(final String postalCode) {
 		this.postalCode = postalCode;
 	}
 
@@ -88,7 +88,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return city;
 	}
 
-	public void setCity(String city) {
+	public void setCity(final String city) {
 		this.city = city;
 	}
 
@@ -97,7 +97,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return contact1;
 	}
 
-	public void setContact1(String contact1) {
+	public void setContact1(final String contact1) {
 		this.contact1 = contact1;
 	}
 
@@ -106,7 +106,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return contact2;
 	}
 
-	public void setContact2(String contact2) {
+	public void setContact2(final String contact2) {
 		this.contact2 = contact2;
 	}
 
@@ -115,7 +115,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return contact3;
 	}
 
-	public void setContact3(String contact3) {
+	public void setContact3(final String contact3) {
 		this.contact3 = contact3;
 	}
 
@@ -123,7 +123,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return remarks;
 	}
 
-	public void setRemarks(String remarks) {
+	public void setRemarks(final String remarks) {
 		this.remarks = remarks;
 	}
 
@@ -142,12 +142,12 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return members;
 	}
 
-	public void setMembers(List<Person> members) {
+	public void setMembers(final List<Person> members) {
 		this.members = members;
 		setMemberOrdering();
 	}
 
-	public boolean addMember(Person e) {
+	public boolean addMember(final Person e) {
 		if (members == null) {
 			initMembers();
 		}
@@ -166,7 +166,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		}
 	}
 
-	public boolean containsMember(HasContacts o) {
+	public boolean containsMember(final HasContacts o) {
 		if (members == null) {
 			return false;
 		}
@@ -182,7 +182,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return p;
 	}
 
-	public boolean removeMember(HasContacts o) {
+	public boolean removeMember(final HasContacts o) {
 		if (members == null) {
 			return false;
 		}
@@ -205,17 +205,17 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		return members.size();
 	}
 
-	public boolean mayMoveUp(HasContacts p) {
+	public boolean mayMoveUp(final HasContacts p) {
 		// person is in list, but not at first position
 		return containsMember(p) && members != null && members.indexOf(p) > 0;
 	}
 
-	public boolean mayMoveDown(HasContacts p) {
+	public boolean mayMoveDown(final HasContacts p) {
 		// person is in list, but not at last position
 		return containsMember(p) && members != null && members.lastIndexOf(p) < members.size() - 1;
 	}
 
-	public HasContacts moveUp(Person p) {
+	public HasContacts moveUp(final Person p) {
 		if (mayMoveUp(p)) {
 			int sourceIndex = members.indexOf(p);
 			int targetIndex = sourceIndex - 1;
@@ -230,7 +230,7 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 		}
 	}
 
-	public HasContacts moveDown(Person p) {
+	public HasContacts moveDown(final Person p) {
 		if (mayMoveDown(p)) {
 			int sourceIndex = members.lastIndexOf(p);
 			int targetIndex = sourceIndex + 1;
@@ -246,11 +246,11 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 	}
 
 	/**
-	 * Compare this family to another. This is done by comparing the last names
-	 * and then the street and then the contact fields (null values are always last).
+	 * Compare this family to another. This is done by comparing the last names and
+	 * then the street and then the contact fields (null values are always last).
 	 */
 	@Override
-	public int compareTo(Family o) {
+	public int compareTo(final Family o) {
 		// other object is null => other object is larger than this
 		if (o == null) {
 			return -1;
@@ -276,9 +276,9 @@ public class Family extends ComparableBean<Family> implements HasContacts, Seria
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (o instanceof Family) {
-			return 0 == compareTo((Family) o);
+	public boolean equals(final Object o) {
+		if (o instanceof Family f) {
+			return 0 == compareTo(f);
 		} else {
 			return super.equals(o);
 		}

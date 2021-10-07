@@ -44,7 +44,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
@@ -52,7 +52,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return lastUpdate;
 	}
 
-	public void setLastUpdate(Timestamp lastUpdate) {
+	public void setLastUpdate(final Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
@@ -60,7 +60,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
+	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
 
@@ -69,7 +69,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return contact1;
 	}
 
-	public void setContact1(String contact1) {
+	public void setContact1(final String contact1) {
 		this.contact1 = contact1;
 	}
 
@@ -78,7 +78,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return contact2;
 	}
 
-	public void setContact2(String contact2) {
+	public void setContact2(final String contact2) {
 		this.contact2 = contact2;
 	}
 
@@ -87,7 +87,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return contact3;
 	}
 
-	public void setContact3(String contact3) {
+	public void setContact3(final String contact3) {
 		this.contact3 = contact3;
 	}
 
@@ -95,7 +95,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return remarks;
 	}
 
-	public void setRemarks(String remarks) {
+	public void setRemarks(final String remarks) {
 		this.remarks = remarks;
 	}
 
@@ -103,7 +103,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return family;
 	}
 
-	public void setFamily(Family family) {
+	public void setFamily(final Family family) {
 		this.family = family;
 	}
 
@@ -111,7 +111,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(final String birthday) {
 		this.birthday = birthday;
 	}
 
@@ -119,7 +119,7 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return lastName;
 	}
 
-	public void setLastName(String lastName) {
+	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
 
@@ -127,12 +127,12 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 		return ordering;
 	}
 
-	public void setOrdering(Integer ordering) {
+	public void setOrdering(final Integer ordering) {
 		this.ordering = ordering;
 	}
 
 	@Override
-	public int compareTo(Person o) {
+	public int compareTo(final Person o) {
 		if (o == null) {
 			return -1;
 		}
@@ -144,9 +144,9 @@ public class Person extends ComparableBean<Person> implements HasContacts, Seria
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (o instanceof Person) {
-			return 0 == compareTo((Person) o);
+	public boolean equals(final Object o) {
+		if (o instanceof Person p) {
+			return 0 == compareTo(p);
 		} else {
 			return super.equals(o);
 		}

@@ -49,7 +49,7 @@ public class Screen extends ContentPane {
 	private Button addFamily = null;
 	private Column data = null;
 
-	public Screen(AddressBookApp app) {
+	public Screen(final AddressBookApp app) {
 		super();
 		this.app = app;
 		initReusableElements();
@@ -69,7 +69,7 @@ public class Screen extends ContentPane {
 			private static final long serialVersionUID = 9132114868976616925L;
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				downloadPdf();
 			}
 		});
@@ -88,7 +88,7 @@ public class Screen extends ContentPane {
 			private static final long serialVersionUID = 9132114868976616923L;
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				try {
 					// add family
 					Family family = null;
@@ -130,18 +130,20 @@ public class Screen extends ContentPane {
 		topColumn.add(bottomRow);
 	}
 
-	private static List<String> extractEmailAddresses(HasContacts hasContacts, List<String> emailAddresses) {
+	private static List<String> extractEmailAddresses(final HasContacts hasContacts,
+		final List<String> emailAddresses) {
 		addIfEmail(hasContacts.getContact1(), emailAddresses);
 		addIfEmail(hasContacts.getContact2(), emailAddresses);
 		addIfEmail(hasContacts.getContact3(), emailAddresses);
-		if (hasContacts instanceof Family) {
-			for (Person person : ((Family)hasContacts).getMembers()) {
+		if (hasContacts instanceof Family f) {
+			for (Person person : f.getMembers()) {
 				extractEmailAddresses(person, emailAddresses);
 			}
 		}
 		return emailAddresses;
 	}
-	private static void addIfEmail(String contact, List<String> emailAddresses) {
+
+	private static void addIfEmail(final String contact, final List<String> emailAddresses) {
 		if (StringUtils.hasLength(contact) && emailPattern.matcher(contact.trim()).matches()) {
 			emailAddresses.add(contact.trim());
 		}
