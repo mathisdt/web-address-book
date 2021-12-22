@@ -1,4 +1,4 @@
-![license](https://img.shields.io/github/license/mathisdt/web-address-book.svg?style=flat) [![Travis-CI Build](https://img.shields.io/travis/mathisdt/web-address-book.svg?label=Travis-CI%20Build&style=flat)](https://travis-ci.org/mathisdt/web-address-book/) [![last released](https://img.shields.io/github/release-date/mathisdt/web-address-book.svg?label=last%20released&style=flat)](https://github.com/mathisdt/web-address-book/releases)
+![license](https://img.shields.io/github/license/mathisdt/web-address-book.svg?style=flat) [![Build](https://github.com/mathisdt/web-address-book/actions/workflows/build.yaml/badge.svg)](https://github.com/mathisdt/web-address-book/actions) [![last released](https://img.shields.io/github/release-date/mathisdt/web-address-book.svg?label=last%20released&style=flat)](https://github.com/mathisdt/web-address-book/releases)
 
 # Web Address Book
 
