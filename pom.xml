@@ -51,7 +51,7 @@
 		<version.supercsv>2.4.0</version.supercsv>
 		<version.xstream>1.4.19</version.xstream>
 		<version.log4j2>2.17.2</version.log4j2>
-		<version.hibernate-commons-annotations>6.0.0.Final</version.hibernate-commons-annotations>
+		<version.hibernate-commons-annotations>6.0.2.Final</version.hibernate-commons-annotations>
 		<version.commons-beanutils>1.9.4</version.commons-beanutils>
 		<version.commons-collections>3.2.2</version.commons-collections>
 		<version.commons-digester>2.1</version.commons-digester>
