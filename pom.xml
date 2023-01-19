@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.7</version> <!-- can't move to 3.x because Echo3 uses javax.servlet and 3.x would bring jakarta.servlet -->
+		<version>2.7.8</version> <!-- can't move to 3.x because Echo3 uses javax.servlet and 3.x would bring jakarta.servlet -->
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
